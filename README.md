@@ -4,13 +4,18 @@ Real Food · Brunch · Good People — Guardamar del Segura.
 
 ## Contenido
 
-- [`estrategia/plan-preapertura.md`](estrategia/plan-preapertura.md) — plan de preapertura a seis meses:
-  contexto de mercado, posicionamiento, calendario mes a mes, pilares de contenido,
-  banco de 40 ideas, Club Origin (lista de espera), alianzas locales, presencia digital,
-  publicidad pagada, plan de apertura, presupuesto, KPIs y riesgos.
+- [`estrategia/plan-marketing-publicidad.md`](estrategia/plan-marketing-publicidad.md) —
+  **plan de ejecución de marketing y publicidad**: alcance, los cinco frentes, contenido
+  y series, redes y comunidad, captación y lista de espera, campañas de pago mes a mes,
+  Google y SEO local, producción de materiales, creadores y medios, calendario de
+  entregables, semana tipo y dependencias.
+  Doc vivo: https://claude.ai/artifact/3w9HxfgXcetDmEPumdvYUW
 
-El plan se edita y comenta como documento vivo en Claude Docs:
-https://claude.ai/artifact/5SwJp7epsqUr1vfudSwAWF
+- [`estrategia/plan-preapertura.md`](estrategia/plan-preapertura.md) —
+  plan de preapertura completo a seis meses (incluye negocio y operativa): contexto de
+  mercado, posicionamiento, calendario, banco de 40 ideas, alianzas, plan de apertura,
+  presupuesto, KPIs y riesgos.
+  Doc vivo: https://claude.ai/artifact/5SwJp7epsqUr1vfudSwAWF
 
-La copia de este repositorio es una instantánea exportada; si el documento cambia,
-hay que volver a exportarlo.
+Las copias de este repositorio son instantáneas exportadas de los documentos.
+Si un documento cambia, hay que volver a exportarlo.
