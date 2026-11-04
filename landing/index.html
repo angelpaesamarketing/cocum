@@ -37,44 +37,52 @@
      lo desplazamos para que entren los rayos y las hojas de la izquierda */
   @media (orientation: portrait) {
     #fondo, .hojas { background-position: 30% center; }
+    /* el recorte vertical es estrecho y el pivote queda cerca: hace falta más
+       giro para que se note lo mismo que en una pantalla ancha */
+    .hojas-a { --giro: 3.8deg; --esc: 1.026; --dx: 8px; --dy: 5px; }
+    .hojas-b { --giro: -3.2deg; --esc: 1.022; --dx: -8px; --dy: 7px; }
+    /* abajo a la derecha no se ve nada en vertical: la vegetación está al pie */
+    .hojas-c {
+      -webkit-mask-image: radial-gradient(78% 40% at 40% 103%, #000 0%, #000 46%, transparent 82%);
+              mask-image: radial-gradient(78% 40% at 40% 103%, #000 0%, #000 46%, transparent 82%);
+      /* el pivote cae fuera de pantalla: así la franja de abajo recorre algo */
+      transform-origin: 40% 114%;
+      --giro: -2.6deg; --esc: 1.022; --dx: -6px; --dy: -8px;
+    }
   }
 
   /* Cada .hojas es una copia opaca del mismo fondo, recortada con una máscara
      sobre una esquina. Como tapa exactamente lo que hay debajo, se puede mover
      sin que aparezca el fondo quieto detrás. El giro es desde la esquina, así
      que la base no se mueve y las puntas sí. */
+  /* Un solo juego de fotogramas: la amplitud va en variables, así se puede
+     subir en vertical o bajar para quien pida menos movimiento, sin duplicar
+     nada. El giro es pequeño en grados, pero a 400 px del pivote son ~17 px de
+     recorrido en la punta de la hoja. La escala añade el golpe de viento. */
+  @keyframes vaiven {
+    0%, 100% { transform: rotate(calc(var(--giro) * -.22)) scale(1.003) translate3d(0, 0, 0); }
+    50%      { transform: rotate(var(--giro)) scale(var(--esc)) translate3d(var(--dx), var(--dy), 0); }
+  }
+  .hojas-a, .hojas-b, .hojas-c { animation: vaiven 9s ease-in-out infinite; }
   .hojas-a {
     -webkit-mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
             mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
     transform-origin: 0% 0%;
-    animation: vaiven-a 9s ease-in-out infinite;
+    --giro: 2.4deg; --esc: 1.016; --dx: 6px; --dy: 3px;
   }
   .hojas-b {
     -webkit-mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
             mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
     transform-origin: 100% 0%;
-    animation: vaiven-b 12.5s ease-in-out infinite;
+    animation-duration: 12.5s; animation-delay: -4s;
+    --giro: -2deg; --esc: 1.014; --dx: -6px; --dy: 5px;
   }
   .hojas-c {
     -webkit-mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
             mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
     transform-origin: 100% 100%;
-    animation: vaiven-c 16s ease-in-out infinite;
-  }
-  /* El giro es pequeño en grados, pero a 400 px del pivote son ~17 px de
-     recorrido en la punta de la hoja, que ya se ve. La escala añade el
-     "acercarse" del golpe de viento. */
-  @keyframes vaiven-a {
-    0%, 100% { transform: rotate(-.5deg) scale(1.004) translate3d(0, 0, 0); }
-    50%      { transform: rotate(2.4deg) scale(1.016) translate3d(6px, 3px, 0); }
-  }
-  @keyframes vaiven-b {
-    0%, 100% { transform: rotate(.6deg)   scale(1.004) translate3d(0, 0, 0); }
-    50%      { transform: rotate(-2.0deg) scale(1.014) translate3d(-6px, 5px, 0); }
-  }
-  @keyframes vaiven-c {
-    0%, 100% { transform: rotate(.3deg)   scale(1.003) translate3d(0, 0, 0); }
-    50%      { transform: rotate(-1.4deg) scale(1.012) translate3d(-4px, -5px, 0); }
+    animation-duration: 16s; animation-delay: -9s;
+    --giro: -1.4deg; --esc: 1.012; --dx: -4px; --dy: -5px;
   }
 
   /* respaldo por si la imagen no carga */
@@ -217,8 +225,15 @@
 
   :focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
 
+  /* Quien pide menos movimiento recibe menos, no cero: con las hojas paradas
+     del todo la página parece rota. Va al final para ganar a lo de arriba. */
   @media (prefers-reduced-motion: reduce) {
-    .glow, .hojas { animation: none; }
+    .glow { animation: none; }
+    .sonido.pista::after { animation: none; }
+    .hojas-a, .hojas-b, .hojas-c { animation-duration: 32s; --esc: 1.004; }
+    .hojas-a { --giro: .7deg;  --dx: 2px;  --dy: 1px; }
+    .hojas-b { --giro: -.6deg; --dx: -2px; --dy: 1px; }
+    .hojas-c { --giro: -.45deg; --dx: -1px; --dy: -1px; }
   }
 </style>
 
@@ -405,11 +420,11 @@
     marcaImg.style.transform =
       `translate3d(0, ${flote.toFixed(2)}px, 0) rotateY(${giro.toFixed(2)}deg) rotateX(${inclina.toFixed(2)}deg)`;
 
-    if (!quieto) {
-      for (const m of motas) {
-        m.y -= m.v; m.x += m.deriva; m.f += 0.012;
-        if (m.y < -12 || m.x < -12 || m.x > w + 12) Object.assign(m, nuevaMota(false));
-      }
+    // con "reducir movimiento" las motas van lentas, pero no se congelan
+    const paso = quieto ? 0.35 : 1;
+    for (const m of motas) {
+      m.y -= m.v * paso; m.x += m.deriva * paso; m.f += 0.012 * paso;
+      if (m.y < -12 || m.x < -12 || m.x > w + 12) Object.assign(m, nuevaMota(false));
     }
     pintarMotas();
     requestAnimationFrame(fotograma);
