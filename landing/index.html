@@ -273,9 +273,11 @@
   const FONDO_MOVIL = "";
   // 3. Logotipo completo.
   const LOGOTIPO = "img/cocum-wordmark.png";
-  // 4. Ambiente de selva. Pon aquí un mp3 con licencia (Epidemic, Artlist, o
-  //    freesound filtrando por CC0) y sustituye al viento sintetizado.
-  const SONIDO = "";
+  // 4. Ambiente de selva. Si se deja vacío, se sintetiza viento con Web Audio.
+  //    El fichero es un bucle de 77 s ya preparado: nivel subido y fundido
+  //    cruzado en el empalme para que no dé el salto al repetir.
+  const SONIDO = "img/ambiente.mp3";
+  const VOLUMEN = 0.6;
   // ─────────────────────────────────────────────────────────────
 
   const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -513,14 +515,18 @@
         audioEl = new Audio(SONIDO);
         audioEl.loop = true; audioEl.preload = "auto"; audioEl.volume = 0;
       }
+      const arrancar = () => {
+        let v = audioEl.volume;
+        clearInterval(audioEl._fundido);
+        audioEl._fundido = setInterval(() => {
+          v = Math.min(VOLUMEN, v + 0.02);
+          audioEl.volume = v;
+          if (v >= VOLUMEN) clearInterval(audioEl._fundido);
+        }, 60);
+      };
       const p = audioEl.play();
-      if (p && p.catch) p.catch(() => {});
-      let v = 0;
-      const subida = setInterval(() => {
-        v = Math.min(0.5, v + 0.02);
-        audioEl.volume = v;
-        if (v >= 0.5) clearInterval(subida);
-      }, 60);
+      // en una conexión lenta el fichero tarda: se sube el volumen cuando suena
+      if (p && p.then) p.then(arrancar).catch(() => {}); else arrancar();
       return true;
     }
     if (!ctxAudio && !construirAmbiente()) return false;
@@ -533,11 +539,12 @@
 
   function bajar() {
     if (audioEl) {
+      clearInterval(audioEl._fundido);
       let v = audioEl.volume;
-      const bajada = setInterval(() => {
+      audioEl._fundido = setInterval(() => {
         v = Math.max(0, v - 0.04);
         audioEl.volume = v;
-        if (v <= 0) { clearInterval(bajada); audioEl.pause(); }
+        if (v <= 0) { clearInterval(audioEl._fundido); audioEl.pause(); }
       }, 50);
     }
     if (ctxAudio && maestro) {

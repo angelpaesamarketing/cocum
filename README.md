@@ -49,7 +49,7 @@ Cloudflare, así que para que sea `cocum.pages.dev` el proyecto tiene que llamar
 | Dónde | Qué |
 | --- | --- |
 | `INSTAGRAM`, en `landing/index.html` | El usuario real. Es el único enlace de la página |
-| `SONIDO`, en `landing/index.html` | Un mp3 de ambiente **con licencia** (Epidemic, Artlist, o freesound filtrando por CC0). Sin fichero suena un viento sintetizado con algún pájaro lejano |
+| `SONIDO`, en `landing/index.html` | Ya puesto: `img/ambiente.mp3`, bucle de 77 s de selva. Se descarga solo al pulsar el botón, no al abrir. Comprueba que la licencia permita uso comercial en web |
 | `FONDO_MOVIL`, en `landing/index.html` | El fondo vertical 9:16 cuando esté generado. Mientras tanto el 16:9 se desplaza al 30% en vertical para no perder la selva |
 | `SITIO`, en `landing/build.py` | El dominio, para que las metas de Open Graph lleven URL absoluta |
 | Aviso legal | Una página o un pie con los datos del titular |

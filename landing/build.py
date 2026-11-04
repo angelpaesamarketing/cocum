@@ -36,7 +36,8 @@ RAIZ = AQUI.parent
 
 # Lo que el sitio sirve de verdad. Nada más se copia a la raíz.
 PUBLICADAS = ("fondo.webp", "cocum-wordmark.png", "marca-alpha.png",
-              "og.jpg", "favicon.png", "apple-touch-icon.png")
+              "og.jpg", "favicon.png", "apple-touch-icon.png",
+              "ambiente.mp3")
 
 
 def imagen_og():
