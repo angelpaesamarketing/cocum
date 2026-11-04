@@ -37,18 +37,6 @@
      lo desplazamos para que entren los rayos y las hojas de la izquierda */
   @media (orientation: portrait) {
     #fondo, .hojas { background-position: 30% center; }
-    /* el recorte vertical es estrecho y el pivote queda cerca: hace falta más
-       giro para que se note lo mismo que en una pantalla ancha */
-    .hojas-a { --giro: 3.8deg; --esc: 1.026; --dx: 8px; --dy: 5px; }
-    .hojas-b { --giro: -3.2deg; --esc: 1.022; --dx: -8px; --dy: 7px; }
-    /* abajo a la derecha no se ve nada en vertical: la vegetación está al pie */
-    .hojas-c {
-      -webkit-mask-image: radial-gradient(78% 40% at 40% 103%, #000 0%, #000 46%, transparent 82%);
-              mask-image: radial-gradient(78% 40% at 40% 103%, #000 0%, #000 46%, transparent 82%);
-      /* el pivote cae fuera de pantalla: así la franja de abajo recorre algo */
-      transform-origin: 40% 114%;
-      --giro: -2.6deg; --esc: 1.022; --dx: -6px; --dy: -8px;
-    }
   }
 
   /* Cada .hojas es una copia opaca del mismo fondo, recortada con una máscara
@@ -218,12 +206,55 @@
     transition: opacity .6s ease;
   }
   .etiqueta-sonido[hidden] { display: block !important; opacity: 0; }
+  /* en pantalla estrecha el rótulo chocaba con el usuario de Instagram:
+     se coloca encima del botón en vez de a su lado */
+  @media (max-width: 560px) {
+    .etiqueta-sonido {
+      left: calc(clamp(12px, 2.4vw, 26px) + env(safe-area-inset-left, 0px));
+      bottom: calc(clamp(12px, 3vh, 26px) + 58px + env(safe-area-inset-bottom, 0px));
+    }
+  }
   .sonido .off { display: none; }
   .sonido[aria-pressed="true"] { color: var(--gold-hi); border-color: rgba(217,179,107,.5); }
   .sonido[aria-pressed="true"] .on { display: none; }
   .sonido[aria-pressed="true"] .off { display: block; }
 
   :focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+
+  /* Va DESPUÉS de las reglas base: misma especificidad, así que si se
+     escribe antes gana la de abajo y el móvil se queda con los valores
+     de escritorio. */
+  @media (orientation: portrait) {
+    /* El recorte vertical es estrecho y el pivote queda cerca, así que hace
+       falta bastante más giro que en una pantalla ancha. Con tanto recorrido
+       la máscara necesita un degradado más largo: si el borde fuera seco se
+       vería doblada la hoja contra el fondo quieto. */
+    .hojas-a, .hojas-b, .hojas-c { animation-duration: 7.5s; }
+    /* Ojo con el signo: girando desde la esquina superior izquierda la hoja
+       se va hacia la izquierda y hacia abajo. El desplazamiento tiene que
+       acompañar a ese movimiento; si va al revés, lo cancela. */
+    .hojas-a {
+      -webkit-mask-image: radial-gradient(66% 62% at 6% 2%, #000 0%, #000 30%, transparent 84%);
+              mask-image: radial-gradient(66% 62% at 6% 2%, #000 0%, #000 30%, transparent 84%);
+      --giro: 6.2deg; --esc: 1.018; --dx: -12px; --dy: 10px;
+    }
+    /* desde la esquina derecha el giro negativo la lleva a la derecha y abajo */
+    .hojas-b {
+      -webkit-mask-image: radial-gradient(58% 66% at 96% 8%, #000 0%, #000 28%, transparent 82%);
+              mask-image: radial-gradient(58% 66% at 96% 8%, #000 0%, #000 28%, transparent 82%);
+      animation-duration: 10.5s;
+      --giro: -5.2deg; --esc: 1.016; --dx: 11px; --dy: 10px;
+    }
+    /* abajo a la derecha no se ve nada en vertical: la vegetación está al pie */
+    .hojas-c {
+      -webkit-mask-image: radial-gradient(82% 44% at 40% 103%, #000 0%, #000 34%, transparent 86%);
+              mask-image: radial-gradient(82% 44% at 40% 103%, #000 0%, #000 34%, transparent 86%);
+      /* el pivote cae fuera de pantalla: así la franja de abajo recorre algo */
+      transform-origin: 40% 114%;
+      animation-duration: 13s;
+      --giro: -4.2deg; --esc: 1.022; --dx: -11px; --dy: -4px;
+    }
+  }
 
   /* Quien pide menos movimiento recibe menos, no cero: con las hojas paradas
      del todo la página parece rota. Va al final para ganar a lo de arriba. */
