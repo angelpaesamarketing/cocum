@@ -115,8 +115,7 @@ def html():
   <meta property="og:image" content="{og_img}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="es_ES">
-  <meta property="og:locale:alternate" content="en_GB">{og_url}
+  <meta property="og:locale" content="es_ES">{og_url}
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">

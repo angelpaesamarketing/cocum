@@ -158,8 +158,8 @@
 
   <div class="soon">
     <hr class="rule">
-    <strong id="soon">PRÓXIMAMENTE</strong>
-    <p class="where" id="where">GUARDAMAR DEL SEGURA · ENERO</p>
+    <strong>PRÓXIMAMENTE</strong>
+    <p class="where">GUARDAMAR DEL SEGURA · ENERO</p>
   </div>
 </main>
 
@@ -200,12 +200,7 @@
   ponerFondo();
   vertical.addEventListener("change", ponerFondo);
 
-  const en = (navigator.language || "es").toLowerCase().startsWith("en");
-  document.documentElement.lang = en ? "en" : "es";
-  if (en) {
-    document.getElementById("soon").textContent = "COMING SOON";
-    document.getElementById("where").textContent = "GUARDAMAR DEL SEGURA · JANUARY";
-  }
+  document.documentElement.lang = "es";
 
   /* ── partículas ── */
   const cv = document.getElementById("motas");

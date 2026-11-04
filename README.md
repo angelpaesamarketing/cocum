@@ -7,7 +7,7 @@ Real Food · Brunch · Good People — Guardamar del Segura.
 
 Una sola pantalla, sin scroll: el símbolo de Cocum girando en 3D sobre la selva, el
 logotipo y **PRÓXIMAMENTE**. Sin formularios, sin contacto y sin pistas de qué tipo de
-local es. Español e inglés por idioma del navegador. Sin dependencias.
+local es. Siempre en castellano. Sin dependencias.
 
 ### Cómo se publica
 

@@ -13,7 +13,6 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="es_ES">
-  <meta property="og:locale:alternate" content="en_GB">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -180,8 +179,8 @@
 
   <div class="soon">
     <hr class="rule">
-    <strong id="soon">PRÓXIMAMENTE</strong>
-    <p class="where" id="where">GUARDAMAR DEL SEGURA · ENERO</p>
+    <strong>PRÓXIMAMENTE</strong>
+    <p class="where">GUARDAMAR DEL SEGURA · ENERO</p>
   </div>
 </main>
 
@@ -222,12 +221,7 @@
   ponerFondo();
   vertical.addEventListener("change", ponerFondo);
 
-  const en = (navigator.language || "es").toLowerCase().startsWith("en");
-  document.documentElement.lang = en ? "en" : "es";
-  if (en) {
-    document.getElementById("soon").textContent = "COMING SOON";
-    document.getElementById("where").textContent = "GUARDAMAR DEL SEGURA · JANUARY";
-  }
+  document.documentElement.lang = "es";
 
   /* ── partículas ── */
   const cv = document.getElementById("motas");
