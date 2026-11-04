@@ -18,8 +18,9 @@ Tres constantes al principio del script lo controlan todo:
 | `FONDO` | Imagen de ambiente generada (sin comida, sin texto). Se deja en `img/` y se nombra aquí |
 | `LOGOTIPO` | Logotipo completo en PNG transparente o SVG. Si se pone, sustituye al nombre compuesto con tipografía |
 
-El símbolo animado sale de `img/marca-alpha.png`, recortado del fondo marrón original.
-Los prompts para generar el fondo y el resto de imágenes están en
+Las imágenes: `img/fondo.webp` es la selva generada, `img/cocum-wordmark.png` el
+logotipo en PNG transparente y `img/marca-alpha.png` el símbolo suelto, recortado del
+original con alfa por luminancia. Los prompts del resto del banco de imágenes están en
 [`estrategia/prompts-imagen.md`](estrategia/prompts-imagen.md).
 
 En enero esta misma página pasa a ser la carta, que es a donde apuntará el QR de las
