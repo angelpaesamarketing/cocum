@@ -2,16 +2,14 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap">
 <style>
-  /* Layout: dark warm single-world brand page — split hero with the capture form, then quiet full-bleed bands. */
+  /* Layout: dark warm single-world brand page — hero, manifiesto, pilares, la carta por venir, el local. */
   :root {
     --ink:      #16130E;
     --panel:    #201B14;
-    --panel-2:  #2A241A;
     --cream:    #F3EADA;
     --cream-dim:#A2967F;
     --gold:     #D9B36B;
     --gold-hi:  #EBCB8C;
-    --olive:    #44532F;
     --line:     rgba(217,179,107,.22);
     --line-soft:rgba(243,234,218,.10);
     --display:  "Bodoni Moda", "Didot", Georgia, "Times New Roman", serif;
@@ -41,6 +39,7 @@
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
+  .narrow { max-width: 760px; }
 
   .eyebrow {
     font-size: .72rem; font-weight: 500;
@@ -50,12 +49,10 @@
   h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
   h1 { font-size: clamp(2.5rem, 6.2vw, 4.1rem); line-height: 1.04; letter-spacing: -.01em; }
   h2 { font-size: clamp(1.9rem, 3.8vw, 2.8rem); line-height: 1.12; }
-  h3 { font-size: 1.22rem; line-height: 1.25; }
   p  { margin: 0; }
   a  { color: var(--gold); }
   :focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; border-radius: 2px; }
 
-  /* ---- wordmark ---- */
   .wordmark { display: grid; gap: 1px; line-height: 1; }
   .wordmark b {
     font-family: var(--display); font-weight: 400;
@@ -66,17 +63,13 @@
     color: var(--gold); padding-left: .18em;
   }
 
-  /* ---- header ---- */
   header {
     position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
     background: rgba(22,19,14,.92);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line-soft);
   }
-  .bar {
-    display: flex; align-items: center; gap: 16px;
-    padding-block: 14px;
-  }
+  .bar { display: flex; align-items: center; gap: 16px; padding-block: 14px; }
   .bar > .wordmark { margin-right: auto; }
   .lang { display: flex; gap: 2px; font-size: .74rem; letter-spacing: .1em; }
   .lang button {
@@ -87,15 +80,16 @@
   .lang button[aria-pressed="true"] { color: var(--ink); background: var(--gold); font-weight: 500; }
 
   .btn {
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
     font-family: var(--sans); font-size: .82rem; font-weight: 500;
     letter-spacing: .12em; text-transform: uppercase;
-    padding: 13px 22px; border-radius: 2px; border: 1px solid var(--gold);
+    padding: 14px 24px; border-radius: 2px; border: 1px solid var(--gold);
     background: var(--gold); color: #1A1510; cursor: pointer;
     text-decoration: none; white-space: nowrap;
     transition: background .18s ease, color .18s ease;
   }
   .btn:hover { background: var(--gold-hi); }
+  .btn svg { width: 16px; height: 16px; flex: none; }
   .btn-ghost { background: none; color: var(--gold); }
   .btn-ghost:hover { background: rgba(217,179,107,.12); color: var(--gold-hi); }
   .bar .btn { padding: 10px 16px; font-size: .72rem; }
@@ -106,63 +100,33 @@
     display: grid; grid-template-columns: 1.04fr .96fr;
     gap: clamp(28px, 4.5vw, 60px); align-items: center;
   }
-  .hero-copy { display: grid; gap: 22px; min-width: 0; }
-  .lead { font-size: clamp(1.02rem, 1.5vw, 1.16rem); color: var(--cream); max-width: 46ch; }
+  .hero-copy { display: grid; gap: 24px; min-width: 0; justify-items: start; }
+  .lead { font-size: clamp(1.02rem, 1.5vw, 1.16rem); max-width: 44ch; }
   .hero-fig { position: relative; min-width: 0; }
-  .hero-fig img {
-    width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-    border-radius: 3px;
-  }
+  .hero-fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 3px; }
   .hero-fig::after {
     content: ""; position: absolute; inset: 0; border-radius: 3px;
-    box-shadow: inset 0 0 0 1px var(--line);
-    pointer-events: none;
+    box-shadow: inset 0 0 0 1px var(--line); pointer-events: none;
   }
-
-  /* ---- form ---- */
-  .signup { display: grid; gap: 10px; max-width: 460px; }
-  .field { display: flex; gap: 8px; flex-wrap: wrap; }
-  .field input[type="email"] {
-    flex: 1 1 210px; min-width: 0;
-    font: 300 1rem/1.4 var(--sans); color: var(--cream);
-    background: var(--panel); border: 1px solid var(--line);
-    border-radius: 2px; padding: 13px 14px;
-  }
-  .field input::placeholder { color: #7E735F; }
-  .field input:focus { border-color: var(--gold); }
-  .consent {
-    display: flex; gap: 9px; align-items: flex-start;
-    font-size: .8rem; color: var(--cream-dim); line-height: 1.5;
-  }
-  .consent input { margin: 3px 0 0; accent-color: var(--gold); flex: none; }
-  .fineprint { font-size: .78rem; color: var(--cream-dim); }
-  .form-msg { font-size: .85rem; line-height: 1.5; }
-  .form-msg[data-tone="error"] { color: #E9A68A; }
-  .done {
-    display: grid; gap: 12px; max-width: 460px;
-    border: 1px solid var(--line); border-radius: 3px;
-    background: var(--panel); padding: 22px;
-  }
-  .done .num {
-    font-family: var(--display); font-size: 2.4rem; line-height: 1;
-    color: var(--gold); font-variant-numeric: tabular-nums;
-  }
-  .demo-note {
-    font-size: .78rem; line-height: 1.55; color: #E3C58E;
-    border-left: 2px solid #8A6B2E; padding-left: 11px;
-  }
-  .demo-note code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: .92em; color: var(--gold-hi);
-  }
+  .handle { font-size: .8rem; color: var(--cream-dim); letter-spacing: .04em; }
 
   /* ---- bands ---- */
   .band { border-top: 1px solid var(--line-soft); }
   .band-inner { padding-block: clamp(46px, 7vw, 84px); }
-  .band--olive { background: linear-gradient(180deg, #1C2016 0%, var(--ink) 100%); }
 
   .section-head { display: grid; gap: 14px; max-width: 54ch; margin-bottom: clamp(28px, 4vw, 44px); }
 
+  /* ---- manifiesto ---- */
+  .manifiesto { display: grid; gap: 20px; }
+  .manifiesto p { font-size: clamp(1.02rem, 1.5vw, 1.14rem); }
+  .manifiesto .pull {
+    font-family: var(--display); font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem); line-height: 1.3;
+    color: var(--gold-hi); border-left: 1px solid var(--line);
+    padding-left: clamp(18px, 3vw, 30px);
+  }
+
+  /* ---- pilares ---- */
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); }
   .pillar { background: var(--ink); padding: 28px 26px; display: grid; gap: 11px; align-content: start; }
   .pillar .k {
@@ -171,29 +135,17 @@
   }
   .pillar p { color: var(--cream-dim); font-size: .95rem; }
 
-  /* ---- club ---- */
-  .club { display: grid; grid-template-columns: 1fr 300px; gap: clamp(28px, 5vw, 56px); align-items: center; }
-  .club-copy { display: grid; gap: 20px; min-width: 0; }
-  .perks { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
-  .perks li {
-    display: grid; grid-template-columns: 16px 1fr; gap: 12px;
-    font-size: .97rem; color: var(--cream);
+  /* ---- la carta ---- */
+  .carta {
+    border: 1px solid var(--line); border-radius: 3px; background: var(--panel);
+    padding: clamp(30px, 5vw, 48px); display: grid; gap: 16px;
+    justify-items: center; text-align: center;
   }
-  .perks li::before {
-    content: ""; width: 7px; height: 7px; margin-top: .55em;
-    border: 1px solid var(--gold); transform: rotate(45deg);
+  .carta .soon {
+    font-family: var(--display); font-size: clamp(1.9rem, 4vw, 2.6rem);
+    line-height: 1.1; color: var(--gold);
   }
-  .card {
-    border: 1px solid var(--line); border-radius: 3px;
-    background: var(--panel); padding: 30px 26px;
-    display: grid; gap: 14px; justify-items: center; text-align: center;
-  }
-  .card img { width: 108px; border-radius: 50%; }
-  .card .serial {
-    font-family: var(--display); font-size: 2.1rem; line-height: 1;
-    color: var(--gold); font-variant-numeric: tabular-nums; letter-spacing: .04em;
-  }
-  .card .cap { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream-dim); }
+  .carta p { max-width: 46ch; color: var(--cream-dim); }
 
   /* ---- local ---- */
   .shot { display: grid; gap: 10px; }
@@ -203,26 +155,28 @@
   .fact { display: grid; gap: 6px; }
   .fact dt { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
   .fact dd { margin: 0; font-family: var(--display); font-size: 1.3rem; }
+  .fact dd.note { font-family: var(--sans); font-size: .82rem; line-height: 1.5; color: var(--cream-dim); }
 
   /* ---- closing ---- */
-  .closing { text-align: center; display: grid; gap: 22px; justify-items: center; }
-  .closing .quote { font-family: var(--display); font-style: italic; font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.25; max-width: 20ch; }
+  .closing { text-align: center; display: grid; gap: 26px; justify-items: center; }
+  .closing img { width: 92px; border-radius: 50%; }
+  .closing .quote {
+    font-family: var(--display); font-style: italic;
+    font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.25; max-width: 20ch;
+  }
 
   footer { border-top: 1px solid var(--line-soft); }
   .foot {
     padding-block: 30px 40px; display: flex; flex-wrap: wrap;
-    gap: 16px 28px; align-items: flex-start;
+    gap: 14px 28px; align-items: center;
     font-size: .8rem; color: var(--cream-dim);
   }
-  .foot p { max-width: 52ch; }
   .foot .sep { margin-left: auto; }
 
   @media (max-width: 880px) {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-fig { order: -1; }
     .hero-fig img { aspect-ratio: 5 / 4; }
-    .club { grid-template-columns: 1fr; }
-    .card { max-width: 300px; }
   }
   @media (max-width: 620px) {
     .pillars { grid-template-columns: 1fr; }
@@ -241,7 +195,7 @@
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
-    <a class="btn" href="#apuntarse" data-es="Apúntate" data-en="Join the list">Apúntate</a>
+    <a class="btn js-ig" href="#" data-es="Síguenos" data-en="Follow us">Síguenos</a>
   </div>
 </header>
 
@@ -251,29 +205,16 @@
       <div class="hero-copy">
         <p class="eyebrow" data-es="Guardamar del Segura · Abrimos en enero" data-en="Guardamar del Segura · Opening in January">Guardamar del Segura · Abrimos en enero</p>
         <h1 data-es="Algo bueno está a punto de abrir" data-en="Something good is about to open">Algo bueno está a punto de abrir</h1>
-        <p class="lead" data-es="Café de especialidad, brunch y comida real. Déjanos tu correo y el día que abramos, el primero lo invitamos nosotros." data-en="Specialty coffee, brunch and real food. Leave us your email and the day we open, the first one is on us.">Café de especialidad, brunch y comida real. Déjanos tu correo y el día que abramos, el primero lo invitamos nosotros.</p>
-
-        <form class="signup" id="apuntarse" novalidate>
-          <div class="field">
-            <input id="email" name="email" type="email" autocomplete="email" required
-                   placeholder="tucorreo@ejemplo.com"
-                   data-ph-es="tucorreo@ejemplo.com" data-ph-en="you@example.com"
-                   aria-label="Correo electrónico">
-            <button class="btn" type="submit" data-es="Quiero entrar" data-en="Count me in">Quiero entrar</button>
-          </div>
-          <label class="consent" for="consent">
-            <input id="consent" name="consent" type="checkbox" required>
-            <span data-es="Acepto que Cocum Origin guarde mi correo para avisarme de la apertura." data-en="I agree that Cocum Origin may store my email to let me know when we open.">Acepto que Cocum Origin guarde mi correo para avisarme de la apertura.</span>
-          </label>
-          <p class="form-msg" id="formMsg" hidden></p>
-          <p class="fineprint" data-es="Sin spam. Cuatro o cinco correos hasta que abramos, y uno el día de la apertura. Te das de baja cuando quieras." data-en="No spam. Four or five emails until we open, and one on opening day. Unsubscribe whenever you like.">Sin spam. Cuatro o cinco correos hasta que abramos, y uno el día de la apertura. Te das de baja cuando quieras.</p>
-        </form>
-
-        <div class="done" id="done" role="status" tabindex="-1" hidden>
-          <p class="num" id="doneNum">Nº 001</p>
-          <p data-es="Estás dentro. Te escribimos con la fecha exacta antes que a nadie, y guardamos tu número del Club Origin." data-en="You are in. We will send you the exact date before anyone else, and your Club Origin number is reserved.">Estás dentro. Te escribimos con la fecha exacta antes que a nadie, y guardamos tu número del Club Origin.</p>
-          <p class="demo-note" id="demoNote" hidden></p>
-        </div>
+        <p class="lead" data-es="Café de especialidad, brunch y comida real en Guardamar. Lo estamos montando ahora mismo, y lo vamos contando todo por Instagram." data-en="Specialty coffee, brunch and real food in Guardamar. We are building it right now, and we are telling the whole story on Instagram.">Café de especialidad, brunch y comida real en Guardamar. Lo estamos montando ahora mismo, y lo vamos contando todo por Instagram.</p>
+        <a class="btn js-ig" href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+          </svg>
+          <span data-es="Síguenos en Instagram" data-en="Follow us on Instagram">Síguenos en Instagram</span>
+        </a>
+        <p class="handle" data-es="Ahí contamos la obra, la carta y el día que abrimos." data-en="That is where we post the build, the menu and the opening day.">Ahí contamos la obra, la carta y el día que abrimos.</p>
       </div>
 
       <figure class="hero-fig">
@@ -284,10 +225,20 @@
   </section>
 
   <section class="band">
+    <div class="wrap narrow band-inner manifiesto">
+      <p class="eyebrow" data-es="El concepto" data-en="The concept">El concepto</p>
+      <h2 data-es="Más que una cafetería" data-en="More than a coffee shop">Más que una cafetería</h2>
+      <p data-es="Cocum Origin nace para cambiar la manera de entender la alimentación saludable: un sitio donde la comida real, el deporte y el placer se encuentran. Un espacio inspirado en la naturaleza, con una identidad tropical y contemporánea, donde cada ingrediente importa." data-en="Cocum Origin exists to change the way healthy eating is understood: a place where real food, sport and pleasure meet. A space inspired by nature, tropical and contemporary, where every ingredient matters.">Cocum Origin nace para cambiar la manera de entender la alimentación saludable: un sitio donde la comida real, el deporte y el placer se encuentran. Un espacio inspirado en la naturaleza, con una identidad tropical y contemporánea, donde cada ingrediente importa.</p>
+      <p class="pull" data-es="Comer sano no significa renunciar al sabor ni al placer." data-en="Eating well does not mean giving up flavour or pleasure.">Comer sano no significa renunciar al sabor ni al placer.</p>
+      <p data-es="Está pensado tanto para quien lleva una vida activa y entrena, como para quien simplemente quiere comer de forma más natural, sin complicaciones ni artificios. Queremos hacer algo más que un sitio donde comer: un punto de encuentro y una comunidad que comparte la misma idea — cuidarse, disfrutar y sentirse bien." data-en="It is built both for people who train and for anyone who simply wants to eat more naturally, with no fuss. We want more than a place to eat: a meeting point and a community that shares one idea — look after yourself, enjoy it, feel good.">Está pensado tanto para quien lleva una vida activa y entrena, como para quien simplemente quiere comer de forma más natural, sin complicaciones ni artificios. Queremos hacer algo más que un sitio donde comer: un punto de encuentro y una comunidad que comparte la misma idea — cuidarse, disfrutar y sentirse bien.</p>
+    </div>
+  </section>
+
+  <section class="band">
     <div class="wrap band-inner">
       <div class="section-head">
         <p class="eyebrow">Real Food · Brunch · Good People</p>
-        <h2 data-es="Comer sano no es renunciar al sabor" data-en="Eating well does not mean giving up flavour">Comer sano no es renunciar al sabor</h2>
+        <h2 data-es="Lo que te vas a encontrar" data-en="What you will find">Lo que te vas a encontrar</h2>
       </div>
       <div class="pillars">
         <article class="pillar">
@@ -306,24 +257,12 @@
     </div>
   </section>
 
-  <section class="band band--olive">
-    <div class="wrap band-inner club">
-      <div class="club-copy">
-        <p class="eyebrow" data-es="Solo 200 plazas" data-en="Only 200 places">Solo 200 plazas</p>
-        <h2 data-es="Club Origin" data-en="Club Origin">Club Origin</h2>
-        <p class="lead" data-es="Las primeras 200 personas que se apunten entran en el Club Origin, con una tarjeta numerada del 001 al 200. Esa numeración no se vuelve a emitir." data-en="The first 200 people on the list join Club Origin, with a card numbered 001 to 200. That numbering is never issued again.">Las primeras 200 personas que se apunten entran en el Club Origin, con una tarjeta numerada del 001 al 200. Esa numeración no se vuelve a emitir.</p>
-        <ul class="perks">
-          <li data-es="Catas privadas antes de abrir, con la carta completa." data-en="Private tastings before we open, with the full menu.">Catas privadas antes de abrir, con la carta completa.</li>
-          <li data-es="Ventaja de socio fundador, permanente." data-en="A founding member benefit, for good.">Ventaja de socio fundador, permanente.</li>
-          <li data-es="Tu nombre en el muro de fundadores del local." data-en="Your name on the founders wall inside.">Tu nombre en el muro de fundadores del local.</li>
-          <li data-es="Invitación a la apertura privada, antes que el público." data-en="An invitation to the private opening, before anyone else.">Invitación a la apertura privada, antes que el público.</li>
-        </ul>
-        <p><a class="btn btn-ghost" href="#apuntarse" data-es="Reservar mi número" data-en="Reserve my number">Reservar mi número</a></p>
-      </div>
-      <div class="card">
-        <img src="img/marca.webp" width="420" height="420" alt="Símbolo de Cocum Origin">
-        <p class="serial">001 / 200</p>
-        <p class="cap" data-es="Socio fundador" data-en="Founding member">Socio fundador</p>
+  <section class="band" id="carta">
+    <div class="wrap narrow band-inner">
+      <div class="carta">
+        <p class="eyebrow" data-es="La carta" data-en="The menu">La carta</p>
+        <p class="soon" data-es="Muy pronto" data-en="Very soon">Muy pronto</p>
+        <p data-es="La estamos cerrando. Cuando abramos, esta página será la carta: la misma a la que lleva el código QR de las mesas." data-en="We are still finishing it. When we open, this page becomes the menu — the same one the QR code on the tables points to.">La estamos cerrando. Cuando abramos, esta página será la carta: la misma a la que lleva el código QR de las mesas.</p>
       </div>
     </div>
   </section>
@@ -350,8 +289,9 @@
           <dd data-es="Enero" data-en="January">Enero</dd>
         </div>
         <div class="fact">
-          <dt data-es="La dirección exacta" data-en="The exact address">La dirección exacta</dt>
-          <dd data-es="Primero, por correo" data-en="By email first">Primero, por correo</dd>
+          <dt data-es="Cómo funciona" data-en="How it works">Cómo funciona</dt>
+          <dd data-es="Sin reservas" data-en="No bookings">Sin reservas</dd>
+          <dd class="note" data-es="Se viene, y si hay cola se espera. Como tiene que ser." data-en="You just come. If there is a queue, you wait. The way it should be.">Se viene, y si hay cola se espera. Como tiene que ser.</dd>
         </div>
       </dl>
     </div>
@@ -359,70 +299,49 @@
 
   <section class="band">
     <div class="wrap band-inner closing">
+      <img src="img/marca.webp" width="420" height="420" alt="Símbolo de Cocum Origin">
       <p class="quote" data-es="Alimenta tu cuerpo. Despierta tus deseos." data-en="Feed your body. Wake up your cravings.">Alimenta tu cuerpo. Despierta tus deseos.</p>
-      <a class="btn" href="#apuntarse" data-es="Apúntate a la lista" data-en="Join the list">Apúntate a la lista</a>
+      <a class="btn js-ig" href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
+        </svg>
+        <span data-es="Síguenos y entérate el primero" data-en="Follow us and find out first">Síguenos y entérate el primero</span>
+      </a>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap foot">
-    <p data-es="Cocum Origin · Guardamar del Segura, Alicante. Tus datos se usan solo para avisarte de la apertura y de lo que preparamos hasta entonces. Puedes darte de baja en cualquier momento." data-en="Cocum Origin · Guardamar del Segura, Alicante. Your data is used only to tell you about the opening and what we are preparing until then. You can unsubscribe at any time.">Cocum Origin · Guardamar del Segura, Alicante. Tus datos se usan solo para avisarte de la apertura y de lo que preparamos hasta entonces. Puedes darte de baja en cualquier momento.</p>
-    <p class="sep">@cocumorigin</p>
+    <p>Cocum Origin · Guardamar del Segura, Alicante</p>
+    <p class="sep"><a class="js-ig" href="#">@cocumorigin</a></p>
   </div>
 </footer>
 
 <script>
   // ─────────────────────────────────────────────────────────────
-  // Pon aquí la URL del formulario (Formspree, Netlify Forms, Brevo,
-  // Mailerlite, un webhook propio...). Mientras esté vacío, la página
-  // funciona en modo demo y NO guarda ningún correo.
-  const FORM_ENDPOINT = "";
+  // El único enlace de la página. Confirma el usuario real de
+  // Instagram antes de publicarla.
+  const INSTAGRAM = "https://www.instagram.com/cocumorigin/";
   // ─────────────────────────────────────────────────────────────
 
-  const form    = document.getElementById("apuntarse");
-  const email   = document.getElementById("email");
-  const consent = document.getElementById("consent");
-  const msg     = document.getElementById("formMsg");
-  const done    = document.getElementById("done");
-  const demo    = document.getElementById("demoNote");
-
-  const T = {
-    es: {
-      badEmail: "Revisa el correo: parece que falta algo.",
-      needConsent: "Marca la casilla para que podamos escribirte.",
-      failed: "No hemos podido guardarlo. Inténtalo otra vez en un momento.",
-      sending: "Enviando…",
-      send: "Quiero entrar",
-      demo: 'Modo demo: este correo <strong>no se ha guardado</strong>. Para que la lista funcione de verdad, pon la URL de tu formulario en <code>FORM_ENDPOINT</code>, al principio del script.'
-    },
-    en: {
-      badEmail: "Check the email address, something looks missing.",
-      needConsent: "Tick the box so we can write to you.",
-      failed: "We could not save it. Please try again in a moment.",
-      sending: "Sending…",
-      send: "Count me in",
-      demo: 'Demo mode: this email was <strong>not saved</strong>. To make the list work for real, set your form URL in <code>FORM_ENDPOINT</code> at the top of the script.'
-    }
-  };
-
-  let lang = "es";
+  document.querySelectorAll(".js-ig").forEach(a => {
+    a.href = INSTAGRAM;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
 
   function setLang(next) {
-    lang = next;
     document.documentElement.lang = next;
     document.querySelectorAll("[data-es]").forEach(el => {
       const v = el.getAttribute("data-" + next);
       if (v) el.textContent = v;
     });
-    document.querySelectorAll("[data-ph-es]").forEach(el => {
-      const v = el.getAttribute("data-ph-" + next);
-      if (v) el.placeholder = v;
-    });
     document.querySelectorAll(".lang button").forEach(b => {
       b.setAttribute("aria-pressed", String(b.dataset.lang === next));
     });
-    if (!demo.hidden) demo.innerHTML = T[next].demo;
     try { localStorage.setItem("cocum-lang", next); } catch (e) {}
   }
 
@@ -434,50 +353,4 @@
   try { start = localStorage.getItem("cocum-lang"); } catch (e) {}
   if (!start) start = (navigator.language || "es").toLowerCase().startsWith("en") ? "en" : "es";
   setLang(start === "en" ? "en" : "es");
-
-  function showMsg(text, tone) {
-    msg.textContent = text;
-    msg.dataset.tone = tone || "";
-    msg.hidden = false;
-  }
-
-  function looksLikeEmail(v) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
-  }
-
-  form.addEventListener("submit", async (ev) => {
-    ev.preventDefault();
-    const t = T[lang];
-    msg.hidden = true;
-
-    if (!looksLikeEmail(email.value)) { showMsg(t.badEmail, "error"); email.focus(); return; }
-    if (!consent.checked)             { showMsg(t.needConsent, "error"); consent.focus(); return; }
-
-    const btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = t.sending;
-
-    if (FORM_ENDPOINT) {
-      try {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({ email: email.value.trim(), lang, source: "landing-preapertura" })
-        });
-        if (!res.ok) throw new Error("bad status");
-      } catch (err) {
-        btn.disabled = false;
-        btn.textContent = t.send;
-        showMsg(t.failed, "error");
-        return;
-      }
-    } else {
-      demo.innerHTML = t.demo;
-      demo.hidden = false;
-    }
-
-    form.hidden = true;
-    done.hidden = false;
-    done.focus();
-  });
 </script>

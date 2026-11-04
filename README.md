@@ -3,19 +3,20 @@
 Real Food · Brunch · Good People — Guardamar del Segura.
 **Apertura prevista: enero de 2027.**
 
-## Landing de preapertura
+## Web de preapertura
 
-`landing/index.html` — página real y desplegable (HTML, CSS y JS sin dependencias),
-bilingüe español/inglés con cambio automático, captación de correo con consentimiento
-RGPD y presentación del Club Origin. Las imágenes están en `landing/img/`.
+`landing/index.html` — página de concepto real y desplegable (HTML, CSS y JS sin
+dependencias), bilingüe español/inglés con cambio automático. Sin formularios, sin
+teléfono, sin correo y sin reservas: el único enlace es Instagram. En enero esta
+misma página pasa a ser la carta, que es a donde apuntará el QR de las mesas.
+Las imágenes están en `landing/img/`.
 
 Para ponerla en producción:
 
-1. Abrir `landing/index.html` y poner la URL del formulario en `FORM_ENDPOINT`
-   (Formspree, Netlify Forms, Mailerlite, Brevo...). Mientras esté vacío la página
-   funciona en modo demo y avisa de que no guarda nada.
+1. Confirmar el usuario de Instagram y ponerlo en `INSTAGRAM`, al principio del
+   script. Es el único enlace de la página.
 2. Subir la carpeta `landing/` a Netlify, Vercel o Cloudflare Pages.
-3. Apuntar el dominio propio y añadir el aviso de privacidad.
+3. Apuntar el dominio propio y añadir el aviso legal con los datos del titular.
 
 Vista publicada: https://claude.ai/artifact/HJ4dHD1ZUH4f2WkH6Dcgat
 

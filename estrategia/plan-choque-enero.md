@@ -16,7 +16,9 @@ Enero es el mes más flojo del año en un pueblo de playa. Eso es a la vez la me
 
 **Lo malo:** la caja de enero, febrero y marzo. No hay turista que tape ningún agujero. Si la apertura depende de que pase gente por delante y entre, no entra nadie.
 
-De ahí sale la única conclusión que importa: **la lista y la comunidad local dejan de ser un apoyo y pasan a ser la única fuente de clientes de los tres primeros meses.** Todo el presupuesto y todas las horas se ordenan detrás de eso.
+De ahí sale la única conclusión que importa: **en enero no entra nadie por casualidad, así que el flujo de gente hay que fabricarlo.** Todo el presupuesto y todas las horas se ordenan detrás de eso.
+
+Y en un sitio de paso pequeño, sin reservas y sin lista de correo, eso se fabrica con tres cosas y en este orden: **la fachada**, que ven todos los que pasan durante doce semanas; **Google Maps**, que es donde busca quien quiere desayunar fuera; y **que el nombre ya suene** cuando pasen por delante. Las redes sirven para lo tercero, no para lo primero.
 
 ### El residente extranjero pasa a ser el cliente principal
 
@@ -38,7 +40,7 @@ Eso cambia decisiones concretas:
 
 2.  **Todo lo físico se pide antes del 5 de diciembre.** Imprentas y rotulistas cierran o van a medio gas del 22 de diciembre al 7 de enero. Lo que no esté pedido antes de esa fecha no llega para abrir.
 
-3.  **El objetivo de lista baja de 1.000 a 400–500 contactos.** Es lo que dan doce semanas con este presupuesto. Prometerse mil es engañarse y tomar malas decisiones en diciembre.
+3.  **El objetivo deja de ser una lista y pasa a ser reconocimiento local.** 1.500 a 2.500 seguidores de la zona y la ficha de Google verificada antes de Navidad. Es lo que dan doce semanas con este presupuesto.
 
 ### Y una cosa que mejora
 
@@ -96,85 +98,112 @@ Y tres hábitos que ahorran horas: generar siempre en vertical 4:5 y 9:16 (lo qu
 
 ## Semana a semana
 
-| Semana    | Fechas         | Lo que sale                                                                                                                                                                                   | Estado    |
-|-----------|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| **1**     | 4 – 9 nov      | Landing en línea con formulario que guarda de verdad · dominio y perfiles reservados · ficha de Google iniciada · banco de 20 imágenes con el prompt base · presupuestos de rotulista pedidos | Pendiente |
-| **2**     | 10 – 16 nov    | Píxel instalado · 3 creatividades en español y 3 en inglés · **campañas CAP-ES y CAP-EN encendidas** · Instagram y Facebook publicando · lona y vinilos encargados                            | Pendiente |
-| **3**     | 17 – 23 nov    | Lona colocada e iluminada · lista de 30 aliados · reunión con el gimnasio del edificio · canal de WhatsApp · entrada en los grupos de Facebook de la zona                                     | Pendiente |
-| **4**     | 24 – 30 nov    | Club Origin abierto con sus 200 plazas · tarjetas numeradas encargadas · **packaging encargado** · primer envío a la lista                                                                    | Pendiente |
-| **5**     | 1 – 7 dic      | Campaña de *retargeting* activa · primera acción de calle navideña · 5 aliados cerrados · contenido de Navidad                                                                                | Pendiente |
-| **6**     | 8 – 14 dic     | Sorteo local · *press kit* · lista de medios cerrada · catas de enero organizadas · segundo envío                                                                                             | Pendiente |
-| **7**     | 15 – 21 dic    | Empuje final de lista antes del parón · presencia en el mercado o evento navideño · dos semanas de contenido ya programado                                                                    | Pendiente |
-| **8 – 9** | 22 dic – 4 ene | Parón. Solo publicación programada y respuesta a mensajes. Nada que dependa de que un tercero conteste                                                                                        | Pendiente |
-| **10**    | 5 – 11 ene     | **Fotos reales de la carta** y sustitución de todo el producto generado · catas con creadores · anuncio de fecha si hay licencia · campaña de cuenta atrás                                    | Pendiente |
-| **11**    | 12 – 18 ene    | Cuenta atrás diaria · *soft opening* por invitación · Google Búsqueda activo · QR de reseñas impreso                                                                                          | Pendiente |
-| **12**    | 19 – 25 ene    | Apertura · reseñas desde el primer café · contenido diario en directo · campaña de apertura                                                                                                   | Pendiente |
+| Semana    | Fechas         | Lo que sale                                                                                                                                                                           | Estado    |
+|-----------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| **1**     | 4 – 9 nov      | Web de concepto publicada con dominio propio · dominio y perfiles reservados · ficha de Google iniciada · banco de 20 imágenes con el prompt base · presupuestos de rotulista pedidos | Pendiente |
+| **2**     | 10 – 16 nov    | Píxel instalado · 3 creatividades en español y 3 en inglés · **campañas CAP-ES y CAP-EN encendidas** · Instagram y Facebook publicando · lona y vinilos encargados                    | Pendiente |
+| **3**     | 17 – 23 nov    | Lona colocada e iluminada · lista de 30 aliados · reunión con el gimnasio del edificio · canal de WhatsApp · entrada en los grupos de Facebook de la zona                             | Pendiente |
+| **4**     | 24 – 30 nov    | Cuenta atrás física preparada para la fachada · cartel de Cocum en cinco negocios aliados · **packaging encargado**                                                                   | Pendiente |
+| **5**     | 1 – 7 dic      | Campaña de *retargeting* activa · primera acción de calle navideña · 5 aliados cerrados · contenido de Navidad                                                                        | Pendiente |
+| **6**     | 8 – 14 dic     | Sorteo local · *press kit* · lista de medios cerrada · catas de enero organizadas · contenido de Navidad grabado en bloque                                                            | Pendiente |
+| **7**     | 15 – 21 dic    | Empuje final de calle antes del parón · presencia en el mercado o evento navideño · dos semanas de contenido ya programado                                                            | Pendiente |
+| **8 – 9** | 22 dic – 4 ene | Parón. Solo publicación programada y respuesta a mensajes. Nada que dependa de que un tercero conteste                                                                                | Pendiente |
+| **10**    | 5 – 11 ene     | **Fotos reales de la carta** y sustitución de todo el producto generado · catas con creadores · anuncio de fecha si hay licencia · campaña de cuenta atrás                            | Pendiente |
+| **11**    | 12 – 18 ene    | Cuenta atrás diaria · *soft opening* por invitación · Google Búsqueda activo · QR de reseñas impreso                                                                                  | Pendiente |
+| **12**    | 19 – 25 ene    | Apertura · reseñas desde el primer café · contenido diario en directo · campaña de apertura                                                                                           | Pendiente |
 
 Las semanas 11 y 12 se mueven en bloque según cuándo llegue la licencia; todo lo anterior no se mueve.
 
-**Las dos semanas que deciden el resultado son la 2 y la 10.** En la 2 arrancan los anuncios: cada día de retraso es un día menos de lista, y la lista es la clientela de enero. En la 10 se hacen las fotos reales: sin ellas se abre con imágenes generadas en circulación, que es exactamente lo que no se puede hacer.
+**Las dos semanas que deciden el resultado son la 2 y la 10.** En la 2 arrancan los anuncios: cada día de retraso es un día menos de reconocimiento antes de abrir en el mes más muerto del año. En la 10 se hacen las fotos reales: sin ellas se abre con imágenes generadas en circulación, que es exactamente lo que no se puede hacer.
 
-## La landing
+## La web
 
-Ya está hecha y publicada: [**Cocum Origin**](https://claude.ai/artifact/HJ4dHD1ZUH4f2WkH6Dcgat). Es una página real, no un diseño: el HTML está en el repositorio, en landing/index.html, y se puede subir a cualquier alojamiento tal cual.
+No es una página de captación: es un folleto. Sin formulario, sin teléfono, sin correo y sin reservas. Para un sitio de paso pequeño eso es lo correcto — en un local donde no se puede reservar, un botón de reserva solo genera llamadas que hay que rechazar.
 
-Lo que lleva: español e inglés con cambio automático según el idioma del móvil, un solo campo de correo, casilla de consentimiento, el Club Origin con sus 200 plazas numeradas, la visualización del local etiquetada como tal, y la promesa concreta — el primer café invitado — que es lo que hace que alguien deje su correo.
+Ya está hecha y publicada: [**Cocum Origin**](https://claude.ai/artifact/HJ4dHD1ZUH4f2WkH6Dcgat). El HTML está en el repositorio, en landing/, y se sube a cualquier alojamiento tal cual.
 
-### Las tres cosas que le faltan, por orden
+Lleva el concepto con las palabras de Davi, los tres pilares, el local etiquetado como visualización, el *sin reservas* dicho de frente, y **un solo botón: Instagram**. Todo lo demás se ha quitado.
 
-1.  **Dónde se guardan los correos.** Ahora mismo está en modo demo: el formulario valida, responde y lo dice claramente, pero no guarda nada. Hay que poner la dirección del formulario en FORM_ENDPOINT, en la primera línea del script. Sirve Formspree, Netlify Forms, Mailerlite o Brevo. Son diez minutos y es lo primero de todo.
+### Para qué sirve realmente
 
-2.  **Un dominio propio.** La página sube a Netlify, Vercel o Cloudflare Pages — gratis — y se le apunta cocumorigin.com. Hasta que no haya dominio propio no se puede poner una dirección en la lona ni en los anuncios sin que parezca provisional.
+Tres cosas, y ninguna de ellas es captar correos:
 
-3.  **Los textos legales.** Aviso de privacidad con el responsable del tratamiento identificado. Media hora, y es obligatorio desde el primer correo que se recoge.
+1.  Que el QR de la lona y, más adelante, el de las mesas lleven a algo decente y no a una red social a medio montar.
 
-### Y en la semana 2
+2.  Que quien busque "Cocum Origin" en Google encuentre una página de la marca, y no únicamente un perfil de Instagram.
 
-- Píxel de Meta y etiqueta de Google instalados, antes de encender ningún anuncio.
+3.  Que en enero sea **la carta**. Es la función que Davi quiere y la que más se va a usar: el QR de las mesas apunta aquí.
 
-- Un QR distinto por soporte — lona, flyer, cartel del gimnasio, biografía de Instagram — cada uno con su parámetro en la dirección, para saber en diciembre cuál trae gente.
+### Lo que falta
 
-**Lo que no hay que hacer ahora:** convertirla en una web de cinco páginas. Hasta enero su único trabajo es capturar correos, y cada sección que se le añada baja la conversión. La web completa se hace en enero, cuando haya carta cerrada y fotos reales que poner en ella.
+1.  **Confirmar el usuario de Instagram** y ponerlo en la página. Es literalmente el único enlace que tiene, así que si está mal, la web no sirve para nada.
 
-## Publicidad: encender el 10 de noviembre
+2.  **Dominio propio y alojamiento.** Netlify, Vercel o Cloudflare Pages, gratis, con cocumorigin.com apuntando ahí.
 
-En el plan de seis meses la publicidad esperaba a enero. Aquí no puede: arranca la semana que viene, en cuanto la landing guarde correos y el píxel esté puesto. El trabajo sigue siendo uno solo hasta enero — **llenar la lista** — y cambia a llenar mesas el día que se abre.
+3.  **Aviso legal.** Sin formulario no hay tratamiento de datos y la carga baja mucho, pero una web de empresa sigue necesitando identificar al titular. Es un párrafo.
 
-| Mes                   | Inversión   | Campañas                               | Qué persigo                                             |
-|-----------------------|-------------|----------------------------------------|---------------------------------------------------------|
-| Nov (desde el día 10) | 350 €       | CAP-ES, CAP-EN                         | Los primeros 120 registros y saber qué anuncio funciona |
-| Dic                   | 700 €       | Más RET, y SIMILARES si se pasa de 300 | Llegar a 300 o 350 antes del parón                      |
-| Ene                   | 1.100 €     | CUENTA ATRÁS, GOOGLE, APERTURA         | Pasar de 450 y llenar la primera semana                 |
-| Feb                   | 550 €       | APERTURA, GOOGLE, RET                  | Sostener febrero, que es el mes más flojo del año       |
-| **Total**             | **2.700 €** |                                        |                                                         |
+4.  **En enero, la sección de carta.** Con los platos en texto, no en PDF ni en imagen, porque es lo que luego posiciona en Google.
 
-Febrero ya no es opcional. Abriendo en enero, los dos meses siguientes no traen turista: si se apaga la publicidad en cuanto se abre, el local se queda sin la única cosa que le está llevando gente.
+### Una decisión para ahora
 
-### El cambio de reparto: inglés al 50%
+**Hasta enero, el QR de la lona lleva a Instagram, no a la web.** Mientras no haya carta, Instagram tiene más que enseñar: la obra avanzando, la cara de Davi, el día a día. El QR cambia a la web en enero, cuando la carta esté publicada. Se hace en un minuto si el QR es dinámico, así que **hay que pedirlo dinámico**, no impreso contra una dirección fija.
 
-En el plan original el inglés era una cuarta parte de la inversión. Abriendo en enero pasa a la mitad, porque en enero el residente extranjero es quien está aquí. Además suele salir más barato: hay menos anunciantes pujando por ese público en esta zona.
+## Publicidad: comprar que el nombre suene
 
-- **CAP-ES:** 15 km alrededor de Guardamar, 25 a 60 años, intereses de gastronomía, café, brunch y vida saludable.
+Sin lista, la publicidad ya no compra registros: compra **reconocimiento**. Que cuando alguien pase por delante de la obra, el nombre no le sea nuevo. Y en enero cambia de trabajo: llevar gente a la puerta.
 
-- **CAP-EN:** el mismo radio, dispositivos en inglés, 35 a 70 años. Este es el público de enero.
+Eso obliga a reconocerlo de frente: **una campaña de reconocimiento es mucho más fácil de desperdiciar que una de registros**, porque no tiene un número claro que diga si funciona. Lo que lo evita son tres disciplinas: radio corto, límite de frecuencia, y juzgarla por los seguidores locales que gana y por las acciones en la ficha de Google, nunca por impresiones.
 
-### Las seis creatividades, hechas con lo que hay
+### El dinero se mueve hacia la fachada
 
-Sin fotos del local y sin producto, las creatividades salen de tres sitios:
+El presupuesto de medios baja de 2.700 € a **2.300 €**, y los 400 € que salen se van a la fachada: lona más grande, iluminación y la cuenta atrás física. En un sitio de paso, ese cartel lo ve toda la gente que va a entrar en enero, todos los días, durante doce semanas. Ninguna campaña compra esa repetición a ese precio.
 
-1.  **Imagen de ambiente generada** con el prompt base, más el titular encima. Sirve para la pieza de marca.
+| Mes                   | Inversión   | Campañas                       | Qué persigo                                                   |
+|-----------------------|-------------|--------------------------------|---------------------------------------------------------------|
+| Nov (desde el día 10) | 300 €       | RECONOCE-ES, RECONOCE-EN       | Que el nombre empiece a sonar y saber qué vídeo funciona      |
+| Dic                   | 600 €       | Más PERFIL                     | Crecer en seguidores locales durante las semanas de más calle |
+| Ene                   | 900 €       | CUENTA ATRÁS, GOOGLE, APERTURA | Que el pueblo sepa la fecha y llenar la primera semana        |
+| Feb                   | 500 €       | APERTURA, GOOGLE               | Sostener febrero, que es el mes más flojo del año             |
+| **Total**             | **2.300 €** |                                |                                                               |
 
-2.  **Vídeo de la obra grabado con el móvil.** Esto es lo que mejor va a rendir, y es gratis: es real, es local, es nuevo y no lo tiene nadie más. Hay que grabar el primero esta semana, aunque el local esté en pelotas — cuanto más cruda la obra, mejor funciona el "antes".
+### Las campañas
 
-3.  **Davi a cámara, treinta segundos**, contando qué va a abrir y por qué. La cara del dueño convierte mejor que cualquier render en un pueblo de 18.000 habitantes.
+| Campaña          | Plataforma y objetivo                           | Público                                                          | Creatividad                          |
+|------------------|-------------------------------------------------|------------------------------------------------------------------|--------------------------------------|
+| **RECONOCE-ES**  | Meta, reconocimiento, frecuencia limitada a 3-5 | 12 km alrededor de Guardamar, 25 a 60 años                       | Vídeo de obra y Davi a cámara        |
+| **RECONOCE-EN**  | Meta, reconocimiento                            | El mismo radio, dispositivos en inglés, 35 a 70 años             | Las mismas piezas grabadas en inglés |
+| **PERFIL**       | Meta, tráfico al perfil de Instagram            | Quien ya vio más del 50% de un vídeo                             | La pieza que mejor haya rendido      |
+| **CUENTA ATRÁS** | Meta, alcance                                   | 10 km, todas las edades adultas                                  | La fecha en pantalla                 |
+| **GOOGLE**       | Google Búsqueda y Maps                          | "desayunos Guardamar", "brunch Guardamar", "breakfast Guardamar" | Texto con extensión de ubicación     |
+| **APERTURA**     | Meta, tráfico al negocio                        | 10 km, más quien esté localizado en la zona esos días            | Lo mejor del banco de vídeo          |
 
-Tres piezas en español y las tres equivalentes en inglés — grabadas aparte, no subtituladas. Cada quince días se apaga la peor y entra una nueva.
+El inglés sigue siendo la mitad de la inversión: en enero el residente extranjero es quien está aquí, y además sale más barato porque hay menos anunciantes pujándole.
 
-### Dos reglas técnicas
+### Las creatividades, con lo que hay
 
-**Durante el parón no se apagan las campañas: se bajan al 30%.** Apagar del todo reinicia el aprendizaje y en enero habría que volver a empezar justo cuando más falta hace.
+1.  **Vídeo de la obra grabado con el móvil.** Es lo que mejor va a rendir y es gratis: real, local, nuevo, y no lo tiene nadie más. El primero se graba esta semana, aunque el local esté en pelotas.
 
-**El objetivo de coste por registro es de 0,80 € a 1,80 €.** Es algo peor que en el plan largo, y es normal: hay menos semanas para optimizar. Si pasa de 2,50 € se cambia la creatividad, nunca el presupuesto.
+2.  **Davi a cámara, treinta segundos.** En un pueblo de 18.000 habitantes la cara del dueño convierte más que cualquier render.
+
+3.  **Imagen de ambiente generada** con el prompt base, para las piezas de marca con texto.
+
+Tres en español y tres en inglés, grabadas aparte y no subtituladas. Cada quince días se apaga la peor y entra una nueva.
+
+### Cómo sé si está funcionando
+
+Sin coste por registro hace falta otro cuadro de mando:
+
+| Qué miro                                            | Dónde quiero llegar                   |
+|-----------------------------------------------------|---------------------------------------|
+| Seguidores locales ganados                          | 1.500 a 2.500 el día que se abre      |
+| Alcance mensual entre quien no sigue la cuenta      | 20.000 a 40.000 personas en diciembre |
+| Coste por mil personas alcanzadas                   | 2 a 5 € en un radio corto             |
+| Acciones en la ficha de Google (cómo llegar, clics) | Es el número que manda desde enero    |
+| Reseñas en los primeros 30 días                     | 150                                   |
+
+**La regla que sustituye al coste por registro:** si en un mes los seguidores locales no suben, el problema es la creatividad, no el presupuesto. Se cambia el vídeo, no la inversión.
+
+**Durante el parón de Navidad no se apagan las campañas: se bajan al 30%.** Apagarlas del todo reinicia el aprendizaje justo antes de enero.
 
 ## Lo físico: la Navidad manda
 
@@ -208,8 +237,8 @@ Comprimir de veinticuatro semanas a doce no se hace trabajando más: se hace qui
 | Muestreo en gimnasios de tres municipios                                 | Dos o tres gimnasios, y en enero. En diciembre no entrena nadie                                                                                                            |
 | Catas con 100 catadores                                                  | Dos catas de veinte personas                                                                                                                                               |
 | 15 alianzas cerradas                                                     | Seis u ocho, las que de verdad mueven gente                                                                                                                                |
-| 1.000 contactos antes de abrir                                           | **400 – 500**                                                                                                                                                              |
-| Las 200 plazas del Club agotadas antes de abrir                          | Se mantienen las 200, pero probablemente no se agoten. No pasa nada: siguen abiertas después, y un Club que tarda en llenarse sigue siendo un Club                         |
+| La lista de correo como motor de la apertura                             | **Desaparece. El objetivo pasa a ser 1.500 – 2.500 seguidores locales y la ficha de Google verificada**                                                                    |
+| El Club Origin como lista de espera numerada                             | Desaparece como mecanismo de correo. La idea de socio fundador se recupera después de abrir, como tarjeta de sellos física para los primeros clientes                      |
 
 ### Lo que no se recorta
 
@@ -223,26 +252,26 @@ Cuatro cosas se quedan enteras, porque recortarlas cuesta más de lo que ahorran
 
 - **Pedir reseñas desde el primer café.** En un enero sin turistas, las reseñas son lo que hace que en Semana Santa nos encuentren.
 
-Rebajar los objetivos ahora no es rendirse. Es la diferencia entre llegar a diciembre comparando con un número realista y tomar decisiones tranquilas, o compararse con mil contactos imposibles y gastar de más por pánico.
+Rebajar los objetivos ahora no es rendirse. Es la diferencia entre llegar a diciembre comparando con un número realista y tomar decisiones tranquilas, o compararse con un número inventado y gastar de más por pánico.
 
 ## Lo que necesito de Davi
 
 Con doce semanas no hay margen para esperar respuestas. Cada cosa de esta lista tiene fecha, y la fecha es la que es porque algo depende de ella.
 
-| Qué necesito                                           | Para qué                                                       | Fecha límite      |
-|--------------------------------------------------------|----------------------------------------------------------------|-------------------|
-| Logo en vectorial y los colores exactos                | Lona, vinilos, landing y anuncios. Sin esto no se pide nada    | **9 nov**         |
-| Datos fiscales y responsable del tratamiento           | Textos legales de la landing, antes del primer correo recogido | **9 nov**         |
-| Visto bueno a la landing y al dominio                  | Publicarla y empezar a captar                                  | **9 nov**         |
-| Presupuesto de medios confirmado (2.700 €)             | Encender campañas el día 10                                    | **9 nov**         |
-| Acceso al local para grabar el primer vídeo de obra    | La creatividad que más va a rendir                             | **9 nov**         |
-| Medidas del vallado y de los cristales                 | Encargar lona y vinilos                                        | 14 nov            |
-| Qué ventaja concreta y permanente lleva el Club Origin | Abrirlo en la semana 4 y poder venderlo                        | 21 nov            |
-| Si el gimnasio del edificio es suyo o de un vecino     | Cerrar la alianza más rentable del plan                        | 28 nov            |
-| Media hora de Davi a cámara                            | Las creatividades en español y en inglés                       | 28 nov            |
-| Diseño de *packaging* aprobado                         | Pedirlo antes del cierre navideño                              | **5 dic**         |
-| **Carta definitiva con nombres y precios**             | Fotos reales de enero, carta en inglés, web y anuncios         | **20 dic**        |
-| Licencia de actividad concedida                        | Anunciar la fecha de apertura                                  | En cuanto la haya |
+| Qué necesito                                         | Para qué                                                       | Fecha límite      |
+|------------------------------------------------------|----------------------------------------------------------------|-------------------|
+| Logo en vectorial y los colores exactos              | Lona, vinilos, landing y anuncios. Sin esto no se pide nada    | **9 nov**         |
+| Datos fiscales y responsable del tratamiento         | Textos legales de la landing, antes del primer correo recogido | **9 nov**         |
+| Visto bueno a la landing y al dominio                | Publicarla y empezar a captar                                  | **9 nov**         |
+| Presupuesto de medios confirmado (2.700 €)           | Encender campañas el día 10                                    | **9 nov**         |
+| Acceso al local para grabar el primer vídeo de obra  | La creatividad que más va a rendir                             | **9 nov**         |
+| Medidas del vallado y de los cristales               | Encargar lona y vinilos                                        | 14 nov            |
+| Usuario definitivo de Instagram y acceso a la cuenta | Es el único sitio al que apunta todo: web, QR, lona y anuncios | 9 nov             |
+| Si el gimnasio del edificio es suyo o de un vecino   | Cerrar la alianza más rentable del plan                        | 28 nov            |
+| Media hora de Davi a cámara                          | Las creatividades en español y en inglés                       | 28 nov            |
+| Diseño de *packaging* aprobado                       | Pedirlo antes del cierre navideño                              | **5 dic**         |
+| **Carta definitiva con nombres y precios**           | Fotos reales de enero, carta en inglés, web y anuncios         | **20 dic**        |
+| Licencia de actividad concedida                      | Anunciar la fecha de apertura                                  | En cuanto la haya |
 
 ### Los dos riesgos que hay que mirar esta semana
 
