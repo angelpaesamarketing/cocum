@@ -32,6 +32,9 @@
     opacity: 0; transition: opacity 1.1s ease;
   }
   #fondo.on { opacity: 1; }
+  /* en vertical, el 16:9 recorta por el centro y se pierde la selva:
+     lo desplazamos para que entren los rayos y las hojas de la izquierda */
+  @media (orientation: portrait) { #fondo { background-position: 30% center; } }
 
   /* respaldo por si la imagen no carga */
   .glow {
@@ -166,8 +169,11 @@
   // ─────────────────────────────────────────────────────────────
   // 1. Confirma el usuario real antes de publicar: es el único enlace.
   const INSTAGRAM = "https://www.instagram.com/cocumorigin/";
-  // 2. Imagen de ambiente del fondo.
+  // 2. Imagen de ambiente del fondo. FONDO_MOVIL es la versión vertical 9:16;
+  //    en cuanto exista, se usa en pantallas verticales y el recorte deja de
+  //    comerse la selva.
   const FONDO = "img/fondo.webp";
+  const FONDO_MOVIL = "";
   // 3. Logotipo. Si algún día hay una versión vectorial mejor, se cambia aquí.
   const LOGOTIPO = "img/cocum-wordmark.png";
   // ─────────────────────────────────────────────────────────────
@@ -177,12 +183,22 @@
 
   if (LOGOTIPO) document.getElementById("logotipo").src = LOGOTIPO;
 
-  if (FONDO) {
-    const el = document.getElementById("fondo");
+  const vertical = window.matchMedia("(orientation: portrait)");
+  const elFondo = document.getElementById("fondo");
+
+  function ponerFondo() {
+    const url = (vertical.matches && FONDO_MOVIL) ? FONDO_MOVIL : FONDO;
+    if (!url) return;
     const probe = new Image();
-    probe.onload = () => { el.style.backgroundImage = `url("${FONDO}")`; el.classList.add("on"); };
-    probe.src = FONDO;
+    probe.onload = () => {
+      elFondo.style.backgroundImage = `url("${url}")`;
+      if (FONDO_MOVIL) elFondo.style.backgroundPosition = vertical.matches ? "center" : "";
+      elFondo.classList.add("on");
+    };
+    probe.src = url;
   }
+  ponerFondo();
+  vertical.addEventListener("change", ponerFondo);
 
   const en = (navigator.language || "es").toLowerCase().startsWith("en");
   document.documentElement.lang = en ? "en" : "es";
