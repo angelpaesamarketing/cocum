@@ -20,7 +20,8 @@
 <title>Cocum Origin</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout: una sola pantalla. Selva al fondo, el símbolo girando en 3D, el logotipo y una sola palabra. */
+  /* Layout: una sola pantalla. Selva al fondo con las hojas meciéndose, el símbolo
+     girando en 3D (y arrastrable), el logotipo y una sola palabra. */
   :root {
     --ink:     #0F120C;
     --cream:   #EFE4D0;
@@ -45,14 +46,51 @@
   /* ── capas ── */
   .layer { position: fixed; inset: 0; pointer-events: none; }
 
-  #fondo {
+  #fondo, .hojas {
     background-size: cover; background-position: center;
     opacity: 0; transition: opacity 1.1s ease;
   }
-  #fondo.on { opacity: 1; }
+  #fondo.on, .hojas.on { opacity: 1; }
   /* en vertical, el 16:9 recorta por el centro y se pierde la selva:
      lo desplazamos para que entren los rayos y las hojas de la izquierda */
-  @media (orientation: portrait) { #fondo { background-position: 30% center; } }
+  @media (orientation: portrait) {
+    #fondo, .hojas { background-position: 30% center; }
+  }
+
+  /* Cada .hojas es una copia opaca del mismo fondo, recortada con una máscara
+     sobre una esquina. Como tapa exactamente lo que hay debajo, se puede mover
+     sin que aparezca el fondo quieto detrás. El giro es desde la esquina, así
+     que la base no se mueve y las puntas sí. */
+  .hojas-a {
+    -webkit-mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
+            mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
+    transform-origin: 0% 0%;
+    animation: vaiven-a 14s ease-in-out infinite;
+  }
+  .hojas-b {
+    -webkit-mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
+            mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
+    transform-origin: 100% 0%;
+    animation: vaiven-b 19s ease-in-out infinite;
+  }
+  .hojas-c {
+    -webkit-mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
+            mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
+    transform-origin: 100% 100%;
+    animation: vaiven-c 23s ease-in-out infinite;
+  }
+  @keyframes vaiven-a {
+    0%, 100% { transform: rotate(-.10deg) translate3d(0, 0, 0); }
+    50%      { transform: rotate(.62deg)  translate3d(2px, 1px, 0); }
+  }
+  @keyframes vaiven-b {
+    0%, 100% { transform: rotate(.14deg)  translate3d(0, 0, 0); }
+    50%      { transform: rotate(-.52deg) translate3d(-2px, 2px, 0); }
+  }
+  @keyframes vaiven-c {
+    0%, 100% { transform: rotate(.08deg)  translate3d(0, 0, 0); }
+    50%      { transform: rotate(-.34deg) translate3d(-1px, -2px, 0); }
+  }
 
   /* respaldo por si la imagen no carga */
   .glow {
@@ -61,7 +99,6 @@
       radial-gradient(120% 90% at 22% 0%, rgba(240,212,154,.10) 0%, transparent 58%);
     animation: breathe 10s ease-in-out infinite;
   }
-  /* oscurece el centro lo justo para que el crema destaque sobre el verde */
   .scrim {
     background:
       radial-gradient(70% 58% at 50% 48%, rgba(10,14,8,.52) 0%, rgba(10,14,8,.28) 55%, transparent 85%),
@@ -90,20 +127,21 @@
     text-align: center;
   }
 
-  .mark { perspective: 900px; width: clamp(96px, 18vmin, 158px); flex: none; }
+  .mark {
+    perspective: 900px;
+    width: clamp(96px, 18vmin, 158px);
+    flex: none;
+    cursor: grab;
+    touch-action: none;
+    -webkit-user-select: none; user-select: none;
+    border-radius: 50%;
+  }
+  .mark.arrastrando { cursor: grabbing; }
   .mark img {
     display: block; width: 100%; height: auto;
-    animation: spin 11s cubic-bezier(.45,0,.55,1) infinite, bob 6.5s ease-in-out infinite;
+    -webkit-user-drag: none;
     filter: drop-shadow(0 0 24px rgba(217,179,107,.45)) drop-shadow(0 0 64px rgba(217,179,107,.2));
-  }
-  @keyframes spin {
-    0%   { transform: rotateY(-27deg) rotateX(5deg); }
-    50%  { transform: rotateY(27deg)  rotateX(-4deg); }
-    100% { transform: rotateY(-27deg) rotateX(5deg); }
-  }
-  @keyframes bob {
-    0%, 100% { translate: 0 -5px; }
-    50%      { translate: 0 5px; }
+    will-change: transform;
   }
 
   .lockup { display: grid; gap: clamp(9px, 1.7vh, 16px); justify-items: center; }
@@ -139,6 +177,7 @@
     text-shadow: 0 0 18px rgba(10,14,8,.9);
   }
 
+  /* ── pie ── */
   .ig {
     position: fixed; left: 50%; translate: -50% 0;
     bottom: calc(clamp(14px, 3vh, 28px) + env(safe-area-inset-bottom, 0px));
@@ -150,11 +189,30 @@
     transition: color .2s ease, background .2s ease;
   }
   .ig:hover, .ig:focus-visible { color: var(--gold-hi); background: rgba(217,179,107,.1); }
+
+  .sonido {
+    position: fixed; z-index: 3;
+    left: calc(clamp(12px, 2.4vw, 26px) + env(safe-area-inset-left, 0px));
+    bottom: calc(clamp(12px, 3vh, 26px) + env(safe-area-inset-bottom, 0px));
+    width: 42px; height: 42px; padding: 0;
+    display: grid; place-items: center;
+    background: rgba(12,16,10,.42); border: 1px solid rgba(217,179,107,.26);
+    border-radius: 999px; cursor: pointer;
+    color: var(--dim);
+    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .sonido:hover, .sonido:focus-visible { color: var(--gold-hi); border-color: rgba(217,179,107,.55); }
+  .sonido svg { width: 17px; height: 17px; }
+  .sonido .off { display: none; }
+  .sonido[aria-pressed="true"] { color: var(--gold-hi); border-color: rgba(217,179,107,.5); }
+  .sonido[aria-pressed="true"] .on { display: none; }
+  .sonido[aria-pressed="true"] .off { display: block; }
+
   :focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
-    .mark img { animation: none; transform: rotateY(-8deg); }
-    .glow { animation: none; }
+    .glow, .hojas { animation: none; }
   }
 </style>
 </head>
@@ -163,13 +221,16 @@
 
 <div class="layer glow"></div>
 <div class="layer" id="fondo"></div>
+<div class="layer hojas hojas-a"></div>
+<div class="layer hojas hojas-b"></div>
+<div class="layer hojas hojas-c"></div>
 <div class="layer scrim"></div>
 <canvas class="layer" id="motas" aria-hidden="true"></canvas>
 <div class="layer vignette"></div>
 
 <main class="stage">
-  <div class="mark">
-    <img src="img/marca-alpha.png" width="512" height="512" alt="">
+  <div class="mark" id="mark" role="img" aria-label="Símbolo de Cocum Origin. Arrástralo para girarlo.">
+    <img src="img/marca-alpha.png" width="512" height="512" alt="" draggable="false">
   </div>
 
   <div class="lockup">
@@ -184,49 +245,106 @@
   </div>
 </main>
 
+<button class="sonido" id="sonido" type="button" aria-pressed="false" aria-label="Activar sonido ambiente">
+  <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4z"></path>
+    <path d="M16 9a4 4 0 0 1 0 6"></path>
+  </svg>
+  <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H3v6h3l5 4z"></path>
+    <path d="M15.5 9a4 4 0 0 1 0 6"></path>
+    <path d="M18.5 6.5a8 8 0 0 1 0 11"></path>
+  </svg>
+</button>
+
 <a class="ig" id="ig" href="#">@cocumorigin</a>
 
 <script>
   // ─────────────────────────────────────────────────────────────
   // 1. Confirma el usuario real antes de publicar: es el único enlace.
   const INSTAGRAM = "https://www.instagram.com/cocumorigin/";
-  // 2. Imagen de ambiente del fondo. FONDO_MOVIL es la versión vertical 9:16;
-  //    en cuanto exista, se usa en pantallas verticales y el recorte deja de
-  //    comerse la selva.
+  // 2. Fondo. FONDO_MOVIL es la versión vertical 9:16; en cuanto exista se usa
+  //    en pantallas verticales y el recorte deja de comerse la selva.
   const FONDO = "img/fondo.webp";
   const FONDO_MOVIL = "";
-  // 3. Logotipo. Si algún día hay una versión vectorial mejor, se cambia aquí.
+  // 3. Logotipo completo.
   const LOGOTIPO = "img/cocum-wordmark.png";
+  // 4. Ambiente de selva. Pon aquí un mp3 con licencia (Epidemic, Artlist, o
+  //    freesound filtrando por CC0) y sustituye al viento sintetizado.
+  const SONIDO = "";
   // ─────────────────────────────────────────────────────────────
+
+  const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.lang = "es";
 
   const ig = document.getElementById("ig");
   ig.href = INSTAGRAM; ig.target = "_blank"; ig.rel = "noopener";
-
   if (LOGOTIPO) document.getElementById("logotipo").src = LOGOTIPO;
 
+  /* ── fondo y hojas ── */
+  const capas = [document.getElementById("fondo"), ...document.querySelectorAll(".hojas")];
   const vertical = window.matchMedia("(orientation: portrait)");
-  const elFondo = document.getElementById("fondo");
 
   function ponerFondo() {
     const url = (vertical.matches && FONDO_MOVIL) ? FONDO_MOVIL : FONDO;
     if (!url) return;
     const probe = new Image();
     probe.onload = () => {
-      elFondo.style.backgroundImage = `url("${url}")`;
-      if (FONDO_MOVIL) elFondo.style.backgroundPosition = vertical.matches ? "center" : "";
-      elFondo.classList.add("on");
+      for (const capa of capas) {
+        capa.style.backgroundImage = `url("${url}")`;
+        if (FONDO_MOVIL) capa.style.backgroundPosition = vertical.matches ? "center" : "";
+        capa.classList.add("on");
+      }
     };
     probe.src = url;
   }
   ponerFondo();
   vertical.addEventListener("change", ponerFondo);
 
-  document.documentElement.lang = "es";
+  /* ── el símbolo: gira solo, y se puede arrastrar ── */
+  const mark = document.getElementById("mark");
+  const marcaImg = mark.querySelector("img");
+
+  let giro = -27;        // grados actuales en Y
+  let inclina = 5;       // grados en X
+  let velocidad = 0;     // grados por fotograma tras soltar
+  let arrastrando = false;
+  let tocado = false;    // una vez arrastrado, el vaivén automático no vuelve a mandar
+  let ultimoX = 0, ultimoY = 0;
+  let t = 0;
+
+  mark.addEventListener("pointerdown", (ev) => {
+    arrastrando = true; tocado = true; velocidad = 0;
+    ultimoX = ev.clientX; ultimoY = ev.clientY;
+    mark.setPointerCapture(ev.pointerId);
+    mark.classList.add("arrastrando");
+    primerGesto();
+  });
+
+  mark.addEventListener("pointermove", (ev) => {
+    if (!arrastrando) return;
+    const dx = ev.clientX - ultimoX;
+    const dy = ev.clientY - ultimoY;
+    ultimoX = ev.clientX; ultimoY = ev.clientY;
+    giro += dx * 0.55;
+    inclina = Math.max(-32, Math.min(32, inclina - dy * 0.3));
+    velocidad = dx * 0.55;
+  });
+
+  function soltar(ev) {
+    if (!arrastrando) return;
+    arrastrando = false;
+    mark.classList.remove("arrastrando");
+    if (ev && ev.pointerId !== undefined && mark.hasPointerCapture(ev.pointerId)) {
+      mark.releasePointerCapture(ev.pointerId);
+    }
+  }
+  mark.addEventListener("pointerup", soltar);
+  mark.addEventListener("pointercancel", soltar);
 
   /* ── partículas ── */
   const cv = document.getElementById("motas");
   const ctx = cv.getContext("2d");
-  const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let motas = [], w = 0, h = 0, dpr = 1;
 
   function medir() {
@@ -235,10 +353,10 @@
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const n = Math.round(Math.min(70, Math.max(26, w * h / 26000)));
-    motas = Array.from({ length: n }, () => nueva(true));
+    motas = Array.from({ length: n }, () => nuevaMota(true));
   }
 
-  function nueva(inicial) {
+  function nuevaMota(inicial) {
     return {
       x: Math.random() * w,
       y: inicial ? Math.random() * h : h + 12,
@@ -250,7 +368,7 @@
     };
   }
 
-  function pintar() {
+  function pintarMotas() {
     ctx.clearRect(0, 0, w, h);
     for (const m of motas) {
       const parpadeo = 0.72 + 0.28 * Math.sin(m.f);
@@ -261,18 +379,200 @@
     }
   }
 
-  function paso() {
-    for (const m of motas) {
-      m.y -= m.v; m.x += m.deriva; m.f += 0.012;
-      if (m.y < -12 || m.x < -12 || m.x > w + 12) Object.assign(m, nueva(false));
+  /* ── un solo bucle para símbolo y partículas ── */
+  function fotograma() {
+    t += 1;
+
+    if (!arrastrando) {
+      if (tocado) {
+        giro += velocidad;
+        velocidad *= 0.955;                       // se va frenando
+        if (Math.abs(velocidad) < 0.02) velocidad = 0;
+        inclina += (0 - inclina) * 0.02;          // vuelve a estar recto
+      } else if (!quieto) {
+        giro = -27 * Math.cos(t * 2 * Math.PI / 660);   // vaivén de 11 s
+        inclina = 4.5 * Math.cos(t * 2 * Math.PI / 660);
+      }
     }
-    pintar();
-    requestAnimationFrame(paso);
+
+    const flote = quieto ? 0 : 5 * Math.sin(t * 2 * Math.PI / 390);
+    marcaImg.style.transform =
+      `translate3d(0, ${flote.toFixed(2)}px, 0) rotateY(${giro.toFixed(2)}deg) rotateX(${inclina.toFixed(2)}deg)`;
+
+    if (!quieto) {
+      for (const m of motas) {
+        m.y -= m.v; m.x += m.deriva; m.f += 0.012;
+        if (m.y < -12 || m.x < -12 || m.x > w + 12) Object.assign(m, nuevaMota(false));
+      }
+    }
+    pintarMotas();
+    requestAnimationFrame(fotograma);
   }
 
   medir();
   window.addEventListener("resize", medir);
-  if (quieto) pintar(); else requestAnimationFrame(paso);
+  requestAnimationFrame(fotograma);
+
+  /* ── ambiente de selva ──────────────────────────────────────────
+     Los navegadores no dejan sonar nada hasta que la persona toca la
+     página, así que arranca apagado y se enciende con el botón o al
+     girar el símbolo. Si SONIDO tiene un fichero, suena ese; si no,
+     se sintetiza viento entre hojas con algún pájaro lejano.          */
+  const btn = document.getElementById("sonido");
+  let sonando = false, audioEl = null, ctxAudio = null, maestro = null, pajaro = null;
+
+  function construirAmbiente() {
+    const A = window.AudioContext || window.webkitAudioContext;
+    if (!A) return false;
+    ctxAudio = new A();
+
+    maestro = ctxAudio.createGain();
+    maestro.gain.value = 0;
+    maestro.connect(ctxAudio.destination);
+
+    // ruido marrón: la base del viento
+    const segundos = 4, n = ctxAudio.sampleRate * segundos;
+    const buffer = ctxAudio.createBuffer(1, n, ctxAudio.sampleRate);
+    const datos = buffer.getChannelData(0);
+    let ultimo = 0;
+    for (let i = 0; i < n; i++) {
+      const blanco = Math.random() * 2 - 1;
+      ultimo = (ultimo + 0.02 * blanco) / 1.02;
+      datos[i] = ultimo * 3.2;
+    }
+
+    // capa grave: el viento
+    const viento = ctxAudio.createBufferSource();
+    viento.buffer = buffer; viento.loop = true;
+    const paso = ctxAudio.createBiquadFilter();
+    paso.type = "lowpass"; paso.frequency.value = 420;
+    const gViento = ctxAudio.createGain(); gViento.gain.value = 0.5;
+    viento.connect(paso).connect(gViento).connect(maestro);
+
+    // capa aguda: las hojas
+    const hojas = ctxAudio.createBufferSource();
+    hojas.buffer = buffer; hojas.loop = true; hojas.playbackRate.value = 1.7;
+    const banda = ctxAudio.createBiquadFilter();
+    banda.type = "bandpass"; banda.frequency.value = 2600; banda.Q.value = 0.7;
+    const gHojas = ctxAudio.createGain(); gHojas.gain.value = 0.16;
+    hojas.connect(banda).connect(gHojas).connect(maestro);
+
+    // racheado: una ola lenta que sube y baja las dos capas
+    const racha = ctxAudio.createOscillator();
+    racha.frequency.value = 0.055;
+    const prof1 = ctxAudio.createGain(); prof1.gain.value = 0.3;
+    const prof2 = ctxAudio.createGain(); prof2.gain.value = 0.12;
+    racha.connect(prof1).connect(gViento.gain);
+    racha.connect(prof2).connect(gHojas.gain);
+
+    viento.start(); hojas.start(); racha.start();
+
+    // pájaros sueltos, lejanos
+    const eco = ctxAudio.createConvolver();
+    const largo = ctxAudio.sampleRate * 1.6;
+    const cola = ctxAudio.createBuffer(2, largo, ctxAudio.sampleRate);
+    for (let c = 0; c < 2; c++) {
+      const d = cola.getChannelData(c);
+      for (let i = 0; i < largo; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / largo, 2.6);
+    }
+    eco.buffer = cola;
+    const gEco = ctxAudio.createGain(); gEco.gain.value = 0.5;
+    eco.connect(gEco).connect(maestro);
+
+    function canto() {
+      if (!sonando) return;
+      const ahora = ctxAudio.currentTime;
+      const notas = 1 + Math.floor(Math.random() * 3);
+      const base = 1700 + Math.random() * 1900;
+      for (let i = 0; i < notas; i++) {
+        const cuando = ahora + i * (0.09 + Math.random() * 0.07);
+        const osc = ctxAudio.createOscillator();
+        const g = ctxAudio.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(base * (0.9 + Math.random() * 0.25), cuando);
+        osc.frequency.exponentialRampToValueAtTime(base * (1.25 + Math.random() * 0.4), cuando + 0.05);
+        g.gain.setValueAtTime(0.0001, cuando);
+        g.gain.exponentialRampToValueAtTime(0.05, cuando + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, cuando + 0.1);
+        osc.connect(g).connect(eco);
+        osc.start(cuando); osc.stop(cuando + 0.14);
+      }
+      pajaro = setTimeout(canto, 3500 + Math.random() * 9000);
+    }
+    pajaro = setTimeout(canto, 1200 + Math.random() * 2500);
+    return true;
+  }
+
+  function subir() {
+    if (SONIDO) {
+      if (!audioEl) {
+        audioEl = new Audio(SONIDO);
+        audioEl.loop = true; audioEl.preload = "auto"; audioEl.volume = 0;
+      }
+      const p = audioEl.play();
+      if (p && p.catch) p.catch(() => {});
+      let v = 0;
+      const subida = setInterval(() => {
+        v = Math.min(0.5, v + 0.02);
+        audioEl.volume = v;
+        if (v >= 0.5) clearInterval(subida);
+      }, 60);
+      return true;
+    }
+    if (!ctxAudio && !construirAmbiente()) return false;
+    if (ctxAudio.state === "suspended") ctxAudio.resume();
+    maestro.gain.cancelScheduledValues(ctxAudio.currentTime);
+    maestro.gain.setValueAtTime(maestro.gain.value, ctxAudio.currentTime);
+    maestro.gain.linearRampToValueAtTime(0.16, ctxAudio.currentTime + 2.2);
+    return true;
+  }
+
+  function bajar() {
+    if (audioEl) {
+      let v = audioEl.volume;
+      const bajada = setInterval(() => {
+        v = Math.max(0, v - 0.04);
+        audioEl.volume = v;
+        if (v <= 0) { clearInterval(bajada); audioEl.pause(); }
+      }, 50);
+    }
+    if (ctxAudio && maestro) {
+      maestro.gain.cancelScheduledValues(ctxAudio.currentTime);
+      maestro.gain.setValueAtTime(maestro.gain.value, ctxAudio.currentTime);
+      maestro.gain.linearRampToValueAtTime(0, ctxAudio.currentTime + 0.8);
+    }
+    clearTimeout(pajaro);
+  }
+
+  function alternar(encender) {
+    sonando = encender;
+    btn.setAttribute("aria-pressed", String(sonando));
+    btn.setAttribute("aria-label", sonando ? "Silenciar sonido ambiente" : "Activar sonido ambiente");
+    if (sonando) {
+      if (!subir()) { sonando = false; btn.setAttribute("aria-pressed", "false"); return; }
+    } else {
+      bajar();
+    }
+    try { localStorage.setItem("cocum-sonido", sonando ? "1" : "0"); } catch (e) {}
+  }
+
+  btn.addEventListener("click", () => alternar(!sonando));
+
+  // si ya lo dejó encendido otra vez, se enciende en cuanto toque algo
+  let querido = false;
+  try { querido = localStorage.getItem("cocum-sonido") === "1"; } catch (e) {}
+
+  function primerGesto() {
+    if (querido && !sonando) alternar(true);
+    querido = false;
+  }
+  window.addEventListener("pointerdown", primerGesto, { once: true });
+
+  // al cambiar de pestaña, que no siga sonando de fondo
+  document.addEventListener("visibilitychange", () => {
+    if (!sonando) return;
+    if (document.hidden) bajar(); else subir();
+  });
 </script>
 
 </body>

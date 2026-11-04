@@ -5,8 +5,9 @@ Real Food · Brunch · Good People — Guardamar del Segura.
 
 ## Teaser de preapertura
 
-Una sola pantalla, sin scroll: el símbolo de Cocum girando en 3D sobre la selva, el
-logotipo y **PRÓXIMAMENTE**. Sin formularios, sin contacto y sin pistas de qué tipo de
+Una sola pantalla, sin scroll: el símbolo de Cocum girando en 3D sobre la selva —
+se puede arrastrar para girarlo —, las hojas de las esquinas meciéndose, ambiente de
+selva opcional y **PRÓXIMAMENTE**. Sin formularios, sin contacto y sin pistas de qué tipo de
 local es. Siempre en castellano. Sin dependencias.
 
 ### Cómo se publica
@@ -48,6 +49,7 @@ Cloudflare, así que para que sea `cocum.pages.dev` el proyecto tiene que llamar
 | Dónde | Qué |
 | --- | --- |
 | `INSTAGRAM`, en `landing/index.html` | El usuario real. Es el único enlace de la página |
+| `SONIDO`, en `landing/index.html` | Un mp3 de ambiente **con licencia** (Epidemic, Artlist, o freesound filtrando por CC0). Sin fichero suena un viento sintetizado con algún pájaro lejano |
 | `FONDO_MOVIL`, en `landing/index.html` | El fondo vertical 9:16 cuando esté generado. Mientras tanto el 16:9 se desplaza al 30% en vertical para no perder la selva |
 | `SITIO`, en `landing/build.py` | El dominio, para que las metas de Open Graph lleven URL absoluta |
 | Aviso legal | Una página o un pie con los datos del titular |
