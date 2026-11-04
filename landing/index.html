@@ -1,356 +1,257 @@
 <title>Cocum Origin</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Jost:wght@300;400;500&display=swap">
 <style>
-  /* Layout: dark warm single-world brand page — hero, manifiesto, pilares, la carta por venir, el local. */
+  /* Layout: una sola pantalla. Fondo atmosférico + partículas, el símbolo girando en 3D y una sola palabra. */
   :root {
-    --ink:      #16130E;
-    --panel:    #201B14;
-    --cream:    #F3EADA;
-    --cream-dim:#A2967F;
-    --gold:     #D9B36B;
-    --gold-hi:  #EBCB8C;
-    --line:     rgba(217,179,107,.22);
-    --line-soft:rgba(243,234,218,.10);
-    --display:  "Bodoni Moda", "Didot", Georgia, "Times New Roman", serif;
-    --sans:     "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    --ink:     #13110C;
+    --ink-2:   #1E1810;
+    --cream:   #F3EADA;
+    --dim:     #9C8F78;
+    --gold:    #D9B36B;
+    --gold-hi: #F0D49A;
+    --display: "Bodoni Moda", "Didot", Georgia, serif;
+    --sans:    "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
     color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     background: var(--ink);
     color: var(--cream);
     font-family: var(--sans);
-    font-size: 16px;
     font-weight: 300;
-    line-height: 1.65;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  body::before {
-    content: ""; position: fixed; inset: 0 0 auto;
-    height: env(safe-area-inset-top, 0px); z-index: 10;
-    background: var(--ink);
-  }
-  img { display: block; max-width: 100%; }
 
-  .wrap {
-    max-width: 1140px; margin-inline: auto;
+  /* ── capas de fondo ── */
+  .layer { position: fixed; inset: 0; pointer-events: none; }
+
+  #fondo {
+    background-size: cover; background-position: center;
+    opacity: 0; transition: opacity .9s ease;
+  }
+  #fondo.on { opacity: .55; }
+
+  .glow {
+    background:
+      radial-gradient(58% 48% at 50% 44%, rgba(217,179,107,.20) 0%, rgba(217,179,107,.07) 38%, transparent 72%),
+      radial-gradient(120% 90% at 50% 0%, rgba(240,212,154,.10) 0%, transparent 60%);
+    animation: breathe 9s ease-in-out infinite;
+  }
+  .rays {
+    background:
+      linear-gradient(176deg, rgba(240,212,154,.10) 0%, transparent 34%),
+      linear-gradient(-172deg, rgba(240,212,154,.07) 0%, transparent 30%);
+    filter: blur(22px);
+  }
+  .vignette {
+    background: radial-gradient(130% 110% at 50% 45%, transparent 42%, rgba(10,8,5,.72) 100%);
+  }
+  #motas { display: block; width: 100%; height: 100%; }
+
+  @keyframes breathe {
+    0%, 100% { opacity: .82; transform: scale(1); }
+    50%      { opacity: 1;   transform: scale(1.045); }
+  }
+
+  /* ── contenido ── */
+  .stage {
+    position: relative; z-index: 2;
+    height: 100%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: clamp(22px, 4vh, 40px);
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: clamp(28px, 6vh, 56px);
+    text-align: center;
   }
-  .narrow { max-width: 760px; }
 
-  .eyebrow {
-    font-size: .72rem; font-weight: 500;
-    letter-spacing: .22em; text-transform: uppercase;
-    color: var(--gold);
+  .mark {
+    perspective: 900px;
+    width: clamp(132px, 26vmin, 236px);
+    flex: none;
   }
-  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; }
-  h1 { font-size: clamp(2.5rem, 6.2vw, 4.1rem); line-height: 1.04; letter-spacing: -.01em; }
-  h2 { font-size: clamp(1.9rem, 3.8vw, 2.8rem); line-height: 1.12; }
-  p  { margin: 0; }
-  a  { color: var(--gold); }
-  :focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; border-radius: 2px; }
+  .mark img {
+    display: block; width: 100%; height: auto;
+    transform-origin: 50% 50%;
+    animation: spin 11s cubic-bezier(.45,0,.55,1) infinite, bob 6.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 26px rgba(217,179,107,.42)) drop-shadow(0 0 70px rgba(217,179,107,.18));
+  }
+  @keyframes spin {
+    0%   { transform: rotateY(-26deg) rotateX(5deg); }
+    50%  { transform: rotateY(26deg)  rotateX(-4deg); }
+    100% { transform: rotateY(-26deg) rotateX(5deg); }
+  }
+  @keyframes bob {
+    0%, 100% { translate: 0 -5px; }
+    50%      { translate: 0 5px; }
+  }
 
-  .wordmark { display: grid; gap: 1px; line-height: 1; }
-  .wordmark b {
+  .lockup { display: grid; gap: clamp(7px, 1.3vh, 12px); justify-items: center; }
+  .lockup img { width: clamp(190px, 46vmin, 330px); }
+  .name {
     font-family: var(--display); font-weight: 400;
-    font-size: 1.32rem; letter-spacing: .12em; color: var(--cream);
+    font-size: clamp(2.2rem, 9vmin, 4rem);
+    line-height: .98; letter-spacing: .1em;
+    margin: 0; padding-left: .1em;
+    color: var(--cream);
   }
-  .wordmark span {
-    font-size: .56rem; font-weight: 400; letter-spacing: .44em;
-    color: var(--gold); padding-left: .18em;
-  }
-
-  header {
-    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-    background: rgba(22,19,14,.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .bar { display: flex; align-items: center; gap: 16px; padding-block: 14px; }
-  .bar > .wordmark { margin-right: auto; }
-  .lang { display: flex; gap: 2px; font-size: .74rem; letter-spacing: .1em; }
-  .lang button {
-    font: inherit; font-family: var(--sans); letter-spacing: inherit;
-    background: none; border: 0; cursor: pointer;
-    color: var(--cream-dim); padding: 6px 7px; border-radius: 3px;
-  }
-  .lang button[aria-pressed="true"] { color: var(--ink); background: var(--gold); font-weight: 500; }
-
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-    font-family: var(--sans); font-size: .82rem; font-weight: 500;
-    letter-spacing: .12em; text-transform: uppercase;
-    padding: 14px 24px; border-radius: 2px; border: 1px solid var(--gold);
-    background: var(--gold); color: #1A1510; cursor: pointer;
-    text-decoration: none; white-space: nowrap;
-    transition: background .18s ease, color .18s ease;
-  }
-  .btn:hover { background: var(--gold-hi); }
-  .btn svg { width: 16px; height: 16px; flex: none; }
-  .btn-ghost { background: none; color: var(--gold); }
-  .btn-ghost:hover { background: rgba(217,179,107,.12); color: var(--gold-hi); }
-  .bar .btn { padding: 10px 16px; font-size: .72rem; }
-
-  /* ---- hero ---- */
-  .hero { padding-block: clamp(40px, 7vw, 76px) clamp(44px, 7vw, 88px); }
-  .hero-grid {
-    display: grid; grid-template-columns: 1.04fr .96fr;
-    gap: clamp(28px, 4.5vw, 60px); align-items: center;
-  }
-  .hero-copy { display: grid; gap: 24px; min-width: 0; justify-items: start; }
-  .lead { font-size: clamp(1.02rem, 1.5vw, 1.16rem); max-width: 44ch; }
-  .hero-fig { position: relative; min-width: 0; }
-  .hero-fig img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 3px; }
-  .hero-fig::after {
-    content: ""; position: absolute; inset: 0; border-radius: 3px;
-    box-shadow: inset 0 0 0 1px var(--line); pointer-events: none;
-  }
-  .handle { font-size: .8rem; color: var(--cream-dim); letter-spacing: .04em; }
-
-  /* ---- bands ---- */
-  .band { border-top: 1px solid var(--line-soft); }
-  .band-inner { padding-block: clamp(46px, 7vw, 84px); }
-
-  .section-head { display: grid; gap: 14px; max-width: 54ch; margin-bottom: clamp(28px, 4vw, 44px); }
-
-  /* ---- manifiesto ---- */
-  .manifiesto { display: grid; gap: 20px; }
-  .manifiesto p { font-size: clamp(1.02rem, 1.5vw, 1.14rem); }
-  .manifiesto .pull {
-    font-family: var(--display); font-style: italic;
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem); line-height: 1.3;
-    color: var(--gold-hi); border-left: 1px solid var(--line);
-    padding-left: clamp(18px, 3vw, 30px);
+  .sub {
+    font-size: clamp(.6rem, 1.7vmin, .76rem);
+    letter-spacing: .62em; padding-left: .62em;
+    color: var(--gold); margin: 0;
   }
 
-  /* ---- pilares ---- */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-soft); }
-  .pillar { background: var(--ink); padding: 28px 26px; display: grid; gap: 11px; align-content: start; }
-  .pillar .k {
-    font-size: .68rem; letter-spacing: .24em; text-transform: uppercase;
-    color: var(--gold); font-weight: 500;
+  .soon { display: grid; gap: clamp(10px, 1.8vh, 16px); justify-items: center; }
+  .rule {
+    width: clamp(120px, 26vmin, 190px); height: 1px; border: 0; margin: 0;
+    background: linear-gradient(90deg, transparent, rgba(217,179,107,.55), transparent);
   }
-  .pillar p { color: var(--cream-dim); font-size: .95rem; }
-
-  /* ---- la carta ---- */
-  .carta {
-    border: 1px solid var(--line); border-radius: 3px; background: var(--panel);
-    padding: clamp(30px, 5vw, 48px); display: grid; gap: 16px;
-    justify-items: center; text-align: center;
+  .soon strong {
+    font-weight: 400;
+    font-size: clamp(.74rem, 2.1vmin, .94rem);
+    letter-spacing: .44em; padding-left: .44em;
+    color: var(--gold-hi);
   }
-  .carta .soon {
-    font-family: var(--display); font-size: clamp(1.9rem, 4vw, 2.6rem);
-    line-height: 1.1; color: var(--gold);
-  }
-  .carta p { max-width: 46ch; color: var(--cream-dim); }
-
-  /* ---- local ---- */
-  .shot { display: grid; gap: 10px; }
-  .shot img { width: 100%; border-radius: 3px; }
-  .shot figcaption { font-size: .74rem; color: var(--cream-dim); letter-spacing: .04em; }
-  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: clamp(28px, 4vw, 40px); }
-  .fact { display: grid; gap: 6px; }
-  .fact dt { font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
-  .fact dd { margin: 0; font-family: var(--display); font-size: 1.3rem; }
-  .fact dd.note { font-family: var(--sans); font-size: .82rem; line-height: 1.5; color: var(--cream-dim); }
-
-  /* ---- closing ---- */
-  .closing { text-align: center; display: grid; gap: 26px; justify-items: center; }
-  .closing img { width: 92px; border-radius: 50%; }
-  .closing .quote {
-    font-family: var(--display); font-style: italic;
-    font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.25; max-width: 20ch;
+  .where {
+    font-size: clamp(.56rem, 1.5vmin, .68rem);
+    letter-spacing: .3em; padding-left: .3em;
+    color: var(--dim); margin: 0;
   }
 
-  footer { border-top: 1px solid var(--line-soft); }
-  .foot {
-    padding-block: 30px 40px; display: flex; flex-wrap: wrap;
-    gap: 14px 28px; align-items: center;
-    font-size: .8rem; color: var(--cream-dim);
+  .ig {
+    position: fixed; left: 50%; translate: -50% 0;
+    bottom: calc(clamp(16px, 3.4vh, 30px) + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
+    font-size: .74rem; letter-spacing: .2em;
+    color: var(--dim); text-decoration: none;
+    padding: 9px 14px; border-radius: 999px;
+    transition: color .2s ease, background .2s ease;
   }
-  .foot .sep { margin-left: auto; }
+  .ig:hover, .ig:focus-visible { color: var(--gold-hi); background: rgba(217,179,107,.09); }
+  :focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
 
-  @media (max-width: 880px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-fig { order: -1; }
-    .hero-fig img { aspect-ratio: 5 / 4; }
-  }
-  @media (max-width: 620px) {
-    .pillars { grid-template-columns: 1fr; }
-    .facts { grid-template-columns: 1fr; gap: 20px; }
-    .bar .btn { display: none; }
-  }
   @media (prefers-reduced-motion: reduce) {
-    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    .mark img { animation: none; transform: rotateY(-8deg); }
+    .glow { animation: none; }
   }
 </style>
 
-<header>
-  <div class="wrap bar">
-    <div class="wordmark"><b>COCUM</b><span>ORIGIN</span></div>
-    <div class="lang" role="group" aria-label="Idioma / Language">
-      <button type="button" data-lang="es" aria-pressed="true">ES</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <a class="btn js-ig" href="#" data-es="Síguenos" data-en="Follow us">Síguenos</a>
+<div class="layer glow"></div>
+<div class="layer rays"></div>
+<div class="layer" id="fondo"></div>
+<canvas class="layer" id="motas" aria-hidden="true"></canvas>
+<div class="layer vignette"></div>
+
+<main class="stage">
+  <div class="mark">
+    <img src="img/marca-alpha.png" width="512" height="512" alt="Símbolo de Cocum Origin">
   </div>
-</header>
 
-<main>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow" data-es="Guardamar del Segura · Abrimos en enero" data-en="Guardamar del Segura · Opening in January">Guardamar del Segura · Abrimos en enero</p>
-        <h1 data-es="Algo bueno está a punto de abrir" data-en="Something good is about to open">Algo bueno está a punto de abrir</h1>
-        <p class="lead" data-es="Café de especialidad, brunch y comida real en Guardamar. Lo estamos montando ahora mismo, y lo vamos contando todo por Instagram." data-en="Specialty coffee, brunch and real food in Guardamar. We are building it right now, and we are telling the whole story on Instagram.">Café de especialidad, brunch y comida real en Guardamar. Lo estamos montando ahora mismo, y lo vamos contando todo por Instagram.</p>
-        <a class="btn js-ig" href="#">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-            <circle cx="12" cy="12" r="4"></circle>
-            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
-          </svg>
-          <span data-es="Síguenos en Instagram" data-en="Follow us on Instagram">Síguenos en Instagram</span>
-        </a>
-        <p class="handle" data-es="Ahí contamos la obra, la carta y el día que abrimos." data-en="That is where we post the build, the menu and the opening day.">Ahí contamos la obra, la carta y el día que abrimos.</p>
-      </div>
+  <div class="lockup" id="lockup">
+    <p class="name">COCUM</p>
+    <p class="sub">ORIGIN</p>
+  </div>
 
-      <figure class="hero-fig">
-        <img src="img/hero-bowl.webp" width="980" height="941"
-             alt="Bowl de açaí con plátano, fresas, arándanos, granola y coco rallado cayendo encima">
-      </figure>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap narrow band-inner manifiesto">
-      <p class="eyebrow" data-es="El concepto" data-en="The concept">El concepto</p>
-      <h2 data-es="Más que una cafetería" data-en="More than a coffee shop">Más que una cafetería</h2>
-      <p data-es="Cocum Origin nace para cambiar la manera de entender la alimentación saludable: un sitio donde la comida real, el deporte y el placer se encuentran. Un espacio inspirado en la naturaleza, con una identidad tropical y contemporánea, donde cada ingrediente importa." data-en="Cocum Origin exists to change the way healthy eating is understood: a place where real food, sport and pleasure meet. A space inspired by nature, tropical and contemporary, where every ingredient matters.">Cocum Origin nace para cambiar la manera de entender la alimentación saludable: un sitio donde la comida real, el deporte y el placer se encuentran. Un espacio inspirado en la naturaleza, con una identidad tropical y contemporánea, donde cada ingrediente importa.</p>
-      <p class="pull" data-es="Comer sano no significa renunciar al sabor ni al placer." data-en="Eating well does not mean giving up flavour or pleasure.">Comer sano no significa renunciar al sabor ni al placer.</p>
-      <p data-es="Está pensado tanto para quien lleva una vida activa y entrena, como para quien simplemente quiere comer de forma más natural, sin complicaciones ni artificios. Queremos hacer algo más que un sitio donde comer: un punto de encuentro y una comunidad que comparte la misma idea — cuidarse, disfrutar y sentirse bien." data-en="It is built both for people who train and for anyone who simply wants to eat more naturally, with no fuss. We want more than a place to eat: a meeting point and a community that shares one idea — look after yourself, enjoy it, feel good.">Está pensado tanto para quien lleva una vida activa y entrena, como para quien simplemente quiere comer de forma más natural, sin complicaciones ni artificios. Queremos hacer algo más que un sitio donde comer: un punto de encuentro y una comunidad que comparte la misma idea — cuidarse, disfrutar y sentirse bien.</p>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap band-inner">
-      <div class="section-head">
-        <p class="eyebrow">Real Food · Brunch · Good People</p>
-        <h2 data-es="Lo que te vas a encontrar" data-en="What you will find">Lo que te vas a encontrar</h2>
-      </div>
-      <div class="pillars">
-        <article class="pillar">
-          <p class="k">Real Food</p>
-          <p data-es="Ingredientes de verdad, de productores a los que podemos poner nombre. Sin polvos y sin atajos." data-en="Real ingredients from producers we can name. No powders, no shortcuts.">Ingredientes de verdad, de productores a los que podemos poner nombre. Sin polvos y sin atajos.</p>
-        </article>
-        <article class="pillar">
-          <p class="k">Brunch</p>
-          <p data-es="Bowls, tostas, huevos y café de especialidad. Desde temprano, también para quien entrena antes de desayunar." data-en="Bowls, toasts, eggs and specialty coffee. From early, for people who train before breakfast too.">Bowls, tostas, huevos y café de especialidad. Desde temprano, también para quien entrena antes de desayunar.</p>
-        </article>
-        <article class="pillar">
-          <p class="k">Good People</p>
-          <p data-es="Un sitio donde quedarse un rato. Terraza, luz cálida y gente que acaba sabiéndose tu pedido." data-en="A place to stay a while. Terrace, warm light and people who end up knowing your order.">Un sitio donde quedarse un rato. Terraza, luz cálida y gente que acaba sabiéndose tu pedido.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band" id="carta">
-    <div class="wrap narrow band-inner">
-      <div class="carta">
-        <p class="eyebrow" data-es="La carta" data-en="The menu">La carta</p>
-        <p class="soon" data-es="Muy pronto" data-en="Very soon">Muy pronto</p>
-        <p data-es="La estamos cerrando. Cuando abramos, esta página será la carta: la misma a la que lleva el código QR de las mesas." data-en="We are still finishing it. When we open, this page becomes the menu — the same one the QR code on the tables points to.">La estamos cerrando. Cuando abramos, esta página será la carta: la misma a la que lleva el código QR de las mesas.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap band-inner">
-      <div class="section-head">
-        <p class="eyebrow" data-es="El local" data-en="The place">El local</p>
-        <h2 data-es="Lo estamos montando ahora mismo" data-en="We are building it right now">Lo estamos montando ahora mismo</h2>
-        <p data-es="Un sitio pensado para estar: luz cálida, plantas por todas partes, barra de café de especialidad y terraza para las mañanas de Guardamar." data-en="A place built to linger in: warm light, plants everywhere, a specialty coffee bar and a terrace for Guardamar mornings.">Un sitio pensado para estar: luz cálida, plantas por todas partes, barra de café de especialidad y terraza para las mañanas de Guardamar.</p>
-      </div>
-      <figure class="shot">
-        <img src="img/local.webp" width="1400" height="933"
-             alt="Fachada de Cocum Origin al atardecer, con rótulo iluminado, plantas y terraza">
-        <figcaption data-es="Visualización del proyecto. El local todavía está en obras." data-en="Project visualisation. The place is still being built.">Visualización del proyecto. El local todavía está en obras.</figcaption>
-      </figure>
-      <dl class="facts">
-        <div class="fact">
-          <dt data-es="Dónde" data-en="Where">Dónde</dt>
-          <dd>Guardamar del Segura</dd>
-        </div>
-        <div class="fact">
-          <dt data-es="Cuándo" data-en="When">Cuándo</dt>
-          <dd data-es="Enero" data-en="January">Enero</dd>
-        </div>
-        <div class="fact">
-          <dt data-es="Cómo funciona" data-en="How it works">Cómo funciona</dt>
-          <dd data-es="Sin reservas" data-en="No bookings">Sin reservas</dd>
-          <dd class="note" data-es="Se viene, y si hay cola se espera. Como tiene que ser." data-en="You just come. If there is a queue, you wait. The way it should be.">Se viene, y si hay cola se espera. Como tiene que ser.</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap band-inner closing">
-      <img src="img/marca.webp" width="420" height="420" alt="Símbolo de Cocum Origin">
-      <p class="quote" data-es="Alimenta tu cuerpo. Despierta tus deseos." data-en="Feed your body. Wake up your cravings.">Alimenta tu cuerpo. Despierta tus deseos.</p>
-      <a class="btn js-ig" href="#">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="5"></rect>
-          <circle cx="12" cy="12" r="4"></circle>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle>
-        </svg>
-        <span data-es="Síguenos y entérate el primero" data-en="Follow us and find out first">Síguenos y entérate el primero</span>
-      </a>
-    </div>
-  </section>
+  <div class="soon">
+    <hr class="rule">
+    <strong id="soon">PRÓXIMAMENTE</strong>
+    <p class="where" id="where">GUARDAMAR DEL SEGURA · ENERO</p>
+  </div>
 </main>
 
-<footer>
-  <div class="wrap foot">
-    <p>Cocum Origin · Guardamar del Segura, Alicante</p>
-    <p class="sep"><a class="js-ig" href="#">@cocumorigin</a></p>
-  </div>
-</footer>
+<a class="ig" id="ig" href="#">@cocumorigin</a>
 
 <script>
   // ─────────────────────────────────────────────────────────────
-  // El único enlace de la página. Confirma el usuario real de
-  // Instagram antes de publicarla.
+  // 1. Confirma el usuario real antes de publicar: es el único enlace.
   const INSTAGRAM = "https://www.instagram.com/cocumorigin/";
+  // 2. Imagen de ambiente generada (sin comida, sin texto). Déjala en
+  //    img/ y pon aquí el nombre, p. ej. "img/ambiente.jpg".
+  const FONDO = "";
+  // 3. Si tienes el logotipo completo en PNG con transparencia o SVG,
+  //    ponlo aquí y sustituye al texto compuesto.
+  const LOGOTIPO = "";
   // ─────────────────────────────────────────────────────────────
 
-  document.querySelectorAll(".js-ig").forEach(a => {
-    a.href = INSTAGRAM;
-    a.target = "_blank";
-    a.rel = "noopener";
-  });
+  const ig = document.getElementById("ig");
+  ig.href = INSTAGRAM; ig.target = "_blank"; ig.rel = "noopener";
 
-  function setLang(next) {
-    document.documentElement.lang = next;
-    document.querySelectorAll("[data-es]").forEach(el => {
-      const v = el.getAttribute("data-" + next);
-      if (v) el.textContent = v;
-    });
-    document.querySelectorAll(".lang button").forEach(b => {
-      b.setAttribute("aria-pressed", String(b.dataset.lang === next));
-    });
-    try { localStorage.setItem("cocum-lang", next); } catch (e) {}
+  if (FONDO) {
+    const el = document.getElementById("fondo");
+    const probe = new Image();
+    probe.onload = () => { el.style.backgroundImage = `url("${FONDO}")`; el.classList.add("on"); };
+    probe.src = FONDO;
   }
 
-  document.querySelectorAll(".lang button").forEach(b => {
-    b.addEventListener("click", () => setLang(b.dataset.lang));
-  });
+  if (LOGOTIPO) {
+    const box = document.getElementById("lockup");
+    box.innerHTML = "";
+    const img = new Image();
+    img.src = LOGOTIPO;
+    img.alt = "Cocum Origin";
+    box.appendChild(img);
+  }
 
-  let start = null;
-  try { start = localStorage.getItem("cocum-lang"); } catch (e) {}
-  if (!start) start = (navigator.language || "es").toLowerCase().startsWith("en") ? "en" : "es";
-  setLang(start === "en" ? "en" : "es");
+  const en = (navigator.language || "es").toLowerCase().startsWith("en");
+  document.documentElement.lang = en ? "en" : "es";
+  if (en) {
+    document.getElementById("soon").textContent = "COMING SOON";
+    document.getElementById("where").textContent = "GUARDAMAR DEL SEGURA · JANUARY";
+  }
+
+  /* ── partículas ── */
+  const cv = document.getElementById("motas");
+  const ctx = cv.getContext("2d");
+  const quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let motas = [], w = 0, h = 0, dpr = 1;
+
+  function medir() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(70, Math.max(26, w * h / 26000)));
+    motas = Array.from({ length: n }, () => nueva(true));
+  }
+
+  function nueva(inicial) {
+    return {
+      x: Math.random() * w,
+      y: inicial ? Math.random() * h : h + 12,
+      r: 0.5 + Math.random() * 2.1,
+      v: 0.10 + Math.random() * 0.34,
+      deriva: (Math.random() - 0.5) * 0.17,
+      a: 0.12 + Math.random() * 0.5,
+      f: Math.random() * Math.PI * 2
+    };
+  }
+
+  function pintar() {
+    ctx.clearRect(0, 0, w, h);
+    for (const m of motas) {
+      const parpadeo = 0.72 + 0.28 * Math.sin(m.f);
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(233, 201, 138, ${(m.a * parpadeo).toFixed(3)})`;
+      ctx.fill();
+    }
+  }
+
+  function paso() {
+    for (const m of motas) {
+      m.y -= m.v; m.x += m.deriva; m.f += 0.012;
+      if (m.y < -12 || m.x < -12 || m.x > w + 12) Object.assign(m, nueva(false));
+    }
+    pintar();
+    requestAnimationFrame(paso);
+  }
+
+  medir();
+  window.addEventListener("resize", medir);
+  if (quieto) pintar(); else requestAnimationFrame(paso);
 </script>

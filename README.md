@@ -3,20 +3,28 @@
 Real Food · Brunch · Good People — Guardamar del Segura.
 **Apertura prevista: enero de 2027.**
 
-## Web de preapertura
+## Teaser de preapertura
 
-`landing/index.html` — página de concepto real y desplegable (HTML, CSS y JS sin
-dependencias), bilingüe español/inglés con cambio automático. Sin formularios, sin
-teléfono, sin correo y sin reservas: el único enlace es Instagram. En enero esta
-misma página pasa a ser la carta, que es a donde apuntará el QR de las mesas.
-Las imágenes están en `landing/img/`.
+`landing/index.html` — una sola pantalla, sin scroll: el símbolo de Cocum girando en
+3D sobre un fondo atmosférico con partículas, el nombre y **PRÓXIMAMENTE**. Sin
+formularios, sin contacto y sin pistas de qué tipo de local es. Español e inglés por
+idioma del navegador. HTML, CSS y JS sin dependencias.
 
-Para ponerla en producción:
+Tres constantes al principio del script lo controlan todo:
 
-1. Confirmar el usuario de Instagram y ponerlo en `INSTAGRAM`, al principio del
-   script. Es el único enlace de la página.
-2. Subir la carpeta `landing/` a Netlify, Vercel o Cloudflare Pages.
-3. Apuntar el dominio propio y añadir el aviso legal con los datos del titular.
+| Constante | Qué hace |
+| --- | --- |
+| `INSTAGRAM` | El único enlace de la página. Confirmar el usuario real antes de publicar |
+| `FONDO` | Imagen de ambiente generada (sin comida, sin texto). Se deja en `img/` y se nombra aquí |
+| `LOGOTIPO` | Logotipo completo en PNG transparente o SVG. Si se pone, sustituye al nombre compuesto con tipografía |
+
+El símbolo animado sale de `img/marca-alpha.png`, recortado del fondo marrón original.
+Los prompts para generar el fondo y el resto de imágenes están en
+[`estrategia/prompts-imagen.md`](estrategia/prompts-imagen.md).
+
+En enero esta misma página pasa a ser la carta, que es a donde apuntará el QR de las
+mesas. Para publicarla: subir `landing/` a Netlify, Vercel o Cloudflare Pages, apuntar
+el dominio y añadir el aviso legal con los datos del titular.
 
 Vista publicada: https://claude.ai/artifact/HJ4dHD1ZUH4f2WkH6Dcgat
 
