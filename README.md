@@ -9,12 +9,29 @@ Una sola pantalla, sin scroll: el símbolo de Cocum girando en 3D sobre la selva
 logotipo y **PRÓXIMAMENTE**. Sin formularios, sin contacto y sin pistas de qué tipo de
 local es. Español e inglés por idioma del navegador. Sin dependencias.
 
-### Dos ficheros, dos destinos
+### Cómo se publica
+
+El sitio publicable vive en la **raíz** del repositorio: `index.html`, `img/` y
+`_redirects`. Está ahí a propósito, para que Cloudflare Pages funcione con sus
+ajustes por defecto sin tocar ningún campo.
+
+| Campo de Cloudflare | Valor |
+| --- | --- |
+| Framework preset | None |
+| Build command | *(vacío)* |
+| Build output directory | *(vacío, o `/`)* |
+| Root directory | `/` |
+
+El build command va vacío a propósito: la imagen de Cloudflare no trae Pillow, que es
+lo que genera la tarjeta de compartir y los iconos. Por eso el sitio se commitea ya
+construido.
+
+### Los dos ficheros
 
 | | Para qué |
 | --- | --- |
-| `landing/index.html` | El fuente. Está escrito para el visor de artifacts de Claude, que le añade el `<!doctype>`, el `<head>` y las metas al publicar. **No se sube tal cual a un hosting**: sin esas etiquetas el navegador entra en modo quirks y en móvil renderiza a ancho de escritorio |
-| `landing/dist/` | Lo que se publica. Lo genera `landing/build.py` envolviendo el fuente en un documento completo, con metas de Open Graph, icono y la imagen para compartir |
+| `landing/index.html` | El fuente. Está escrito para el visor de artifacts de Claude, que le añade el `<!doctype>`, el `<head>` y las metas al publicar. **No se sirve tal cual**: sin esas etiquetas el navegador entra en modo quirks y en móvil renderiza a ancho de escritorio. `_redirects` manda `/landing/*` a la portada para que nadie aterrice ahí |
+| `index.html` en la raíz | Lo que se publica. Lo genera `landing/build.py` envolviendo el fuente en un documento completo, con metas de Open Graph, icono y tarjeta 1200×630 para compartir |
 
 Después de tocar `landing/index.html`:
 
@@ -22,24 +39,9 @@ Después de tocar `landing/index.html`:
 python3 landing/build.py
 ```
 
-y commitear `landing/dist/`. Va commiteado a propósito: así Cloudflare no necesita
-ejecutar nada, y su imagen de build no trae Pillow, que es lo que genera la tarjeta
-de compartir y los iconos.
-
-### Ajustes de Cloudflare Pages
-
-Conectado al repositorio de GitHub:
-
-| Campo | Valor |
-| --- | --- |
-| Framework preset | None |
-| Build command | *(vacío)* |
-| Build output directory | `landing/dist` |
-| Root directory | `/` |
-| Production branch | la rama de trabajo, o `main` si se crea |
-
-Con subida directa, se arrastra el **contenido** de `landing/dist` (el `index.html`
-y la carpeta `img`), no la carpeta `dist` entera.
+y commitear la raíz. El subdominio `*.pages.dev` sale del **nombre del proyecto** en
+Cloudflare, así que para que sea `cocum.pages.dev` el proyecto tiene que llamarse
+`cocum`.
 
 ### Lo que queda por rellenar
 

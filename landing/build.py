@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""Genera landing/dist/, que es lo que se publica en Cloudflare Pages.
+"""Genera el sitio publicable en la RAÍZ del repositorio.
 
-index.html está escrito para el visor de artifacts de Claude, que le añade el
-<!doctype>, el <head> y las metas al publicar. Un hosting normal no hace eso, así
-que este script envuelve el mismo contenido en un documento HTML completo, añade
-las metas para compartir en redes, genera el icono y la imagen de Open Graph, y
-copia las imágenes.
+landing/index.html está escrito para el visor de artifacts de Claude, que le añade
+el <!doctype>, el <head> y las metas al publicar. Un hosting normal no hace eso, así
+que este script envuelve el mismo contenido en un documento HTML completo, añade las
+metas para compartir en redes, genera el icono y la imagen de Open Graph, y copia las
+imágenes.
+
+Sale a la raíz y no a una subcarpeta para que Cloudflare Pages funcione con sus
+ajustes por defecto, sin tocar el directorio de salida.
 
     python3 landing/build.py
 
-Salida: landing/dist/
+Salida: ./index.html, ./img/, ./_redirects
 """
 
 import re
@@ -29,7 +32,11 @@ DESCRIPCION = "Cocum Origin abre próximamente en Guardamar del Segura."
 
 AQUI = Path(__file__).resolve().parent
 IMG = AQUI / "img"
-DIST = AQUI / "dist"
+RAIZ = AQUI.parent
+
+# Lo que el sitio sirve de verdad. Nada más se copia a la raíz.
+PUBLICADAS = ("fondo.webp", "cocum-wordmark.png", "marca-alpha.png",
+              "og.jpg", "favicon.png", "apple-touch-icon.png")
 
 
 def imagen_og():
@@ -127,18 +134,24 @@ def main():
     imagen_og()
     iconos()
 
-    if DIST.exists():
-        shutil.rmtree(DIST)
-    (DIST / "img").mkdir(parents=True)
+    (RAIZ / "index.html").write_text(html(), encoding="utf-8")
 
-    (DIST / "index.html").write_text(html(), encoding="utf-8")
+    destino = RAIZ / "img"
+    destino.mkdir(exist_ok=True)
+    for nombre in PUBLICADAS:
+        shutil.copy2(IMG / nombre, destino / nombre)
+    # si alguna imagen deja de usarse, que no se quede colgada en el sitio
+    for suelta in destino.iterdir():
+        if suelta.name not in PUBLICADAS:
+            suelta.unlink()
 
-    for nombre in ("fondo.webp", "cocum-wordmark.png", "marca-alpha.png",
-                   "og.jpg", "favicon.png", "apple-touch-icon.png"):
-        shutil.copy2(IMG / nombre, DIST / "img" / nombre)
+    # el fuente del artifact no es una página válida por sí sola: que nadie
+    # aterrice en ella, ni Google la indexe
+    (RAIZ / "_redirects").write_text("/landing/*  /  302\n", encoding="utf-8")
 
-    total = sum(f.stat().st_size for f in DIST.rglob("*") if f.is_file())
-    print(f"dist listo: {len(list(DIST.rglob('*')))} archivos, {total // 1024} KB")
+    total = sum((destino / n).stat().st_size for n in PUBLICADAS)
+    total += (RAIZ / "index.html").stat().st_size
+    print(f"sitio listo en la raíz: index.html + {len(PUBLICADAS)} imágenes, {total // 1024} KB")
     if not SITIO:
         print("aviso: SITIO está vacío, las metas de Open Graph van en ruta relativa")
 
