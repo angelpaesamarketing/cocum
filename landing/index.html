@@ -47,31 +47,34 @@
     -webkit-mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
             mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
     transform-origin: 0% 0%;
-    animation: vaiven-a 14s ease-in-out infinite;
+    animation: vaiven-a 9s ease-in-out infinite;
   }
   .hojas-b {
     -webkit-mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
             mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
     transform-origin: 100% 0%;
-    animation: vaiven-b 19s ease-in-out infinite;
+    animation: vaiven-b 12.5s ease-in-out infinite;
   }
   .hojas-c {
     -webkit-mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
             mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
     transform-origin: 100% 100%;
-    animation: vaiven-c 23s ease-in-out infinite;
+    animation: vaiven-c 16s ease-in-out infinite;
   }
+  /* El giro es pequeño en grados, pero a 400 px del pivote son ~17 px de
+     recorrido en la punta de la hoja, que ya se ve. La escala añade el
+     "acercarse" del golpe de viento. */
   @keyframes vaiven-a {
-    0%, 100% { transform: rotate(-.10deg) translate3d(0, 0, 0); }
-    50%      { transform: rotate(.62deg)  translate3d(2px, 1px, 0); }
+    0%, 100% { transform: rotate(-.5deg) scale(1.004) translate3d(0, 0, 0); }
+    50%      { transform: rotate(2.4deg) scale(1.016) translate3d(6px, 3px, 0); }
   }
   @keyframes vaiven-b {
-    0%, 100% { transform: rotate(.14deg)  translate3d(0, 0, 0); }
-    50%      { transform: rotate(-.52deg) translate3d(-2px, 2px, 0); }
+    0%, 100% { transform: rotate(.6deg)   scale(1.004) translate3d(0, 0, 0); }
+    50%      { transform: rotate(-2.0deg) scale(1.014) translate3d(-6px, 5px, 0); }
   }
   @keyframes vaiven-c {
-    0%, 100% { transform: rotate(.08deg)  translate3d(0, 0, 0); }
-    50%      { transform: rotate(-.34deg) translate3d(-1px, -2px, 0); }
+    0%, 100% { transform: rotate(.3deg)   scale(1.003) translate3d(0, 0, 0); }
+    50%      { transform: rotate(-1.4deg) scale(1.012) translate3d(-4px, -5px, 0); }
   }
 
   /* respaldo por si la imagen no carga */
@@ -176,16 +179,37 @@
     position: fixed; z-index: 3;
     left: calc(clamp(12px, 2.4vw, 26px) + env(safe-area-inset-left, 0px));
     bottom: calc(clamp(12px, 3vh, 26px) + env(safe-area-inset-bottom, 0px));
-    width: 42px; height: 42px; padding: 0;
+    width: 48px; height: 48px; padding: 0;
     display: grid; place-items: center;
-    background: rgba(12,16,10,.42); border: 1px solid rgba(217,179,107,.26);
+    background: rgba(12,16,10,.62); border: 1px solid rgba(217,179,107,.5);
     border-radius: 999px; cursor: pointer;
-    color: var(--dim);
+    color: var(--gold);
     -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
     transition: color .2s ease, border-color .2s ease, background .2s ease;
   }
   .sonido:hover, .sonido:focus-visible { color: var(--gold-hi); border-color: rgba(217,179,107,.55); }
-  .sonido svg { width: 17px; height: 17px; }
+  .sonido svg { width: 19px; height: 19px; }
+  /* anillo que late hasta que alguien lo toca: si no, el botón no se ve */
+  .sonido.pista::after {
+    content: ""; position: absolute; inset: -5px;
+    border: 1px solid var(--gold); border-radius: 999px;
+    animation: latido 2.6s ease-out infinite;
+  }
+  @keyframes latido {
+    0%   { opacity: .75; transform: scale(1); }
+    70%  { opacity: 0;   transform: scale(1.45); }
+    100% { opacity: 0;   transform: scale(1.45); }
+  }
+  .etiqueta-sonido {
+    position: fixed; z-index: 3;
+    left: calc(clamp(12px, 2.4vw, 26px) + 60px + env(safe-area-inset-left, 0px));
+    bottom: calc(clamp(12px, 3vh, 26px) + 15px + env(safe-area-inset-bottom, 0px));
+    font-size: .62rem; letter-spacing: .26em; padding-left: .26em;
+    color: var(--gold); pointer-events: none;
+    text-shadow: 0 0 16px rgba(10,14,8,.95);
+    transition: opacity .6s ease;
+  }
+  .etiqueta-sonido[hidden] { display: block !important; opacity: 0; }
   .sonido .off { display: none; }
   .sonido[aria-pressed="true"] { color: var(--gold-hi); border-color: rgba(217,179,107,.5); }
   .sonido[aria-pressed="true"] .on { display: none; }
@@ -224,7 +248,8 @@
   </div>
 </main>
 
-<button class="sonido" id="sonido" type="button" aria-pressed="false" aria-label="Activar sonido ambiente">
+<p class="etiqueta-sonido" id="etiquetaSonido">ACTIVA EL SONIDO</p>
+<button class="sonido pista" id="sonido" type="button" aria-pressed="false" aria-label="Activar sonido ambiente">
   <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M11 5 6 9H3v6h3l5 4z"></path>
     <path d="M16 9a4 4 0 0 1 0 6"></path>
@@ -502,7 +527,7 @@
     if (ctxAudio.state === "suspended") ctxAudio.resume();
     maestro.gain.cancelScheduledValues(ctxAudio.currentTime);
     maestro.gain.setValueAtTime(maestro.gain.value, ctxAudio.currentTime);
-    maestro.gain.linearRampToValueAtTime(0.16, ctxAudio.currentTime + 2.2);
+    maestro.gain.linearRampToValueAtTime(0.3, ctxAudio.currentTime + 2.2);
     return true;
   }
 
@@ -535,7 +560,18 @@
     try { localStorage.setItem("cocum-sonido", sonando ? "1" : "0"); } catch (e) {}
   }
 
-  btn.addEventListener("click", () => alternar(!sonando));
+  const etiqueta = document.getElementById("etiquetaSonido");
+  let pistaVista = false;
+  try { pistaVista = localStorage.getItem("cocum-pista") === "1"; } catch (e) {}
+
+  function quitarPista() {
+    btn.classList.remove("pista");
+    etiqueta.hidden = true;
+    try { localStorage.setItem("cocum-pista", "1"); } catch (e) {}
+  }
+  if (pistaVista) quitarPista(); else setTimeout(quitarPista, 9000);
+
+  btn.addEventListener("click", () => { quitarPista(); alternar(!sonando); });
 
   // si ya lo dejó encendido otra vez, se enciende en cuanto toque algo
   let querido = false;
