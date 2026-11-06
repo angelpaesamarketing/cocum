@@ -40,7 +40,7 @@ Eso cambia decisiones concretas:
 
 2.  **Todo lo físico se pide antes del 5 de diciembre.** Imprentas y rotulistas cierran o van a medio gas del 22 de diciembre al 7 de enero. Lo que no esté pedido antes de esa fecha no llega para abrir.
 
-3.  **El objetivo deja de ser una lista y pasa a ser reconocimiento local.** 1.500 a 2.500 seguidores de la zona y la ficha de Google verificada antes de Navidad. Es lo que dan doce semanas con este presupuesto.
+3.  **El objetivo deja de ser una lista y pasa a ser seguidores locales en Instagram.** 1.500 a 2.500 seguidores de la zona y la ficha de Google verificada antes de Navidad. Es lo que dan doce semanas con este presupuesto.
 
 ### Y una cosa que mejora
 
@@ -118,11 +118,11 @@ Las semanas 11 y 12 se mueven en bloque según cuándo llegue la licencia; todo 
 
 ## La web
 
-No es una página de captación: es un folleto. Sin formulario, sin teléfono, sin correo y sin reservas. Para un sitio de paso pequeño eso es lo correcto — en un local donde no se puede reservar, un botón de reserva solo genera llamadas que hay que rechazar.
+No es una página de captación ni un folleto: es un teaser de una sola pantalla. Sin formulario, sin teléfono, sin correo y sin reservas. Para un sitio de paso pequeño eso es lo correcto — en un local donde no se puede reservar, un botón de reserva solo genera llamadas que hay que rechazar.
 
 Ya está hecha y publicada: [**Cocum Origin**](https://claude.ai/artifact/HJ4dHD1ZUH4f2WkH6Dcgat). El HTML está en el repositorio, en landing/, y se sube a cualquier alojamiento tal cual.
 
-Lleva el concepto con las palabras de Davi, los tres pilares, el local etiquetado como visualización, el *sin reservas* dicho de frente, y **un solo botón: Instagram**. Todo lo demás se ha quitado.
+Es una pantalla única: el símbolo girando en 3D sobre un fondo atmosférico con partículas, el nombre, **PRÓXIMAMENTE** y el usuario de Instagram. Ninguna pista de qué tipo de local es — ni comida, ni carta, ni concepto. Eso se guarda para el día que se enseñe la carta, que es lo que hace que merezca la pena seguir la cuenta.
 
 ### Para qué sirve realmente
 
@@ -148,62 +148,88 @@ Tres cosas, y ninguna de ellas es captar correos:
 
 **Hasta enero, el QR de la lona lleva a Instagram, no a la web.** Mientras no haya carta, Instagram tiene más que enseñar: la obra avanzando, la cara de Davi, el día a día. El QR cambia a la web en enero, cuando la carta esté publicada. Se hace en un minuto si el QR es dinámico, así que **hay que pedirlo dinámico**, no impreso contra una dirección fija.
 
-## Publicidad: comprar que el nombre suene
+## Publicidad: comprar visitas al perfil
 
-Sin lista, la publicidad ya no compra registros: compra **reconocimiento**. Que cuando alguien pase por delante de la obra, el nombre no le sea nuevo. Y en enero cambia de trabajo: llevar gente a la puerta.
+El objetivo acordado es **ganar seguidores en Instagram**, porque Davi va a alimentar la cuenta. Eso es medible y se puede optimizar, pero hay que entender cómo funciona de verdad antes de poner un euro.
 
-Eso obliga a reconocerlo de frente: **una campaña de reconocimiento es mucho más fácil de desperdiciar que una de registros**, porque no tiene un número claro que diga si funciona. Lo que lo evita son tres disciplinas: radio corto, límite de frecuencia, y juzgarla por los seguidores locales que gana y por las acciones en la ficha de Google, nunca por impresiones.
+**Meta no tiene un objetivo "conseguir seguidores".** No existe. Lo que se compra son **visitas al perfil**, y el seguimiento lo convierte el perfil, no el anuncio. El embudo real es:
 
-### El dinero se mueve hacia la fachada
+> anuncio → visita al perfil → seguir
 
-El presupuesto de medios baja de 2.700 € a **2.300 €**, y los 400 € que salen se van a la fachada: lona más grande, iluminación y la cuenta atrás física. En un sitio de paso, ese cartel lo ve toda la gente que va a entrar en enero, todos los días, durante doce semanas. Ninguna campaña compra esa repetición a ese precio.
+El anuncio solo controla el primer salto. El segundo lo decide lo que se encuentra quien llega. Ahí es donde se escapa el dinero en la mayoría de campañas locales.
 
-| Mes                   | Inversión   | Campañas                       | Qué persigo                                                   |
-|-----------------------|-------------|--------------------------------|---------------------------------------------------------------|
-| Nov (desde el día 10) | 300 €       | RECONOCE-ES, RECONOCE-EN       | Que el nombre empiece a sonar y saber qué vídeo funciona      |
-| Dic                   | 600 €       | Más PERFIL                     | Crecer en seguidores locales durante las semanas de más calle |
-| Ene                   | 900 €       | CUENTA ATRÁS, GOOGLE, APERTURA | Que el pueblo sepa la fecha y llenar la primera semana        |
-| Feb                   | 500 €       | APERTURA, GOOGLE               | Sostener febrero, que es el mes más flojo del año             |
-| **Total**             | **2.300 €** |                                |                                                               |
+### Primero el perfil, después el dinero
 
-### Las campañas
+Si alguien llega al perfil y ve tres fotos misteriosas sin explicación, no sigue: no entiende qué es y se va. Cada euro gastado antes de tener el perfil montado se tira. **Nada de publicidad hasta que exista esto:**
 
-| Campaña          | Plataforma y objetivo                           | Público                                                          | Creatividad                          |
-|------------------|-------------------------------------------------|------------------------------------------------------------------|--------------------------------------|
-| **RECONOCE-ES**  | Meta, reconocimiento, frecuencia limitada a 3-5 | 12 km alrededor de Guardamar, 25 a 60 años                       | Vídeo de obra y Davi a cámara        |
-| **RECONOCE-EN**  | Meta, reconocimiento                            | El mismo radio, dispositivos en inglés, 35 a 70 años             | Las mismas piezas grabadas en inglés |
-| **PERFIL**       | Meta, tráfico al perfil de Instagram            | Quien ya vio más del 50% de un vídeo                             | La pieza que mejor haya rendido      |
-| **CUENTA ATRÁS** | Meta, alcance                                   | 10 km, todas las edades adultas                                  | La fecha en pantalla                 |
-| **GOOGLE**       | Google Búsqueda y Maps                          | "desayunos Guardamar", "brunch Guardamar", "breakfast Guardamar" | Texto con extensión de ubicación     |
-| **APERTURA**     | Meta, tráfico al negocio                        | 10 km, más quien esté localizado en la zona esos días            | Lo mejor del banco de vídeo          |
+- [ ] **Biografía que diga qué es en una línea.** *Café de especialidad, brunch y comida real · Guardamar del Segura · Abrimos en enero.*
 
-El inglés sigue siendo la mitad de la inversión: en enero el residente extranjero es quien está aquí, y además sale más barato porque hay menos anunciantes pujándole.
+- [ ] **Nueve publicaciones como mínimo**, tres filas completas. Una cuadrícula con cuatro fotos parece una cuenta abandonada.
 
-### Las creatividades, con lo que hay
+- [ ] **El campo "nombre"** — el de debajo del usuario, no el usuario — puesto como Cocum Origin \| Brunch Guardamar. Ese campo lo indexa el buscador de Instagram, y es descubrimiento gratis.
 
-1.  **Vídeo de la obra grabado con el móvil.** Es lo que mejor va a rendir y es gratis: real, local, nuevo, y no lo tiene nadie más. El primero se graba esta semana, aunque el local esté en pelotas.
+- [ ] **Destacados**: qué es Cocum · la obra · dónde estamos.
 
-2.  **Davi a cámara, treinta segundos.** En un pueblo de 18.000 habitantes la cara del dueño convierte más que cualquier render.
+- [ ] Enlace a la web.
 
-3.  **Imagen de ambiente generada** con el prompt base, para las piezas de marca con texto.
+### Vender el contenido, no la apertura
 
-Tres en español y tres en inglés, grabadas aparte y no subtituladas. Cada quince días se apaga la peor y entra una nueva.
+Este es el cambio de mensaje que hace que la gente pulse seguir.
 
-### Cómo sé si está funcionando
+*"Abrimos en enero"* es **un acontecimiento**: no hace falta seguir a nadie para enterarse, ya se verá. *"Vamos a enseñar cómo se monta el local, la carta y quién trae cada cosa"* es **una serie**: eso sí se sigue, porque promete algo que llega luego y que no te llega de otra forma.
 
-Sin coste por registro hace falta otro cuadro de mando:
+Un anuncio que promete un suceso no gana seguidores. Uno que promete contenido, sí.
 
-| Qué miro                                            | Dónde quiero llegar                   |
-|-----------------------------------------------------|---------------------------------------|
-| Seguidores locales ganados                          | 1.500 a 2.500 el día que se abre      |
-| Alcance mensual entre quien no sigue la cuenta      | 20.000 a 40.000 personas en diciembre |
-| Coste por mil personas alcanzadas                   | 2 a 5 € en un radio corto             |
-| Acciones en la ficha de Google (cómo llegar, clics) | Es el número que manda desde enero    |
-| Reseñas en los primeros 30 días                     | 150                                   |
+### Los tres anuncios
 
-**La regla que sustituye al coste por registro:** si en un mes los seguidores locales no suben, el problema es la creatividad, no el presupuesto. Se cambia el vídeo, no la inversión.
+|                   | Qué se ve                                                                                                                                                  | Por qué funciona                                                                                                |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| **A · La obra**   | Davi en el local a medio montar, móvil, 20 segundos: *"Esto va a ser Cocum Origin. Abrimos en enero en Guardamar y lo vamos a ir enseñando todo por aquí"* | Es real, es local y promete continuidad. En un pueblo, la cara del dueño convierte más que cualquier producción |
+| **B · El café**   | El molino, la extracción, el vapor. Lo único de producto que ya existe antes de abrir                                                                      | Dice la categoría sin enseñar platos que aún no hay. Y el café de especialidad tiene público propio             |
+| **C · El pueblo** | Guardamar al amanecer, la pinada, la playa, y el símbolo al final                                                                                          | Es el que mejor se comparte entre gente de la zona. Apela a la pertenencia, no al producto                      |
 
-**Durante el parón de Navidad no se apagan las campañas: se bajan al 30%.** Apagarlas del todo reinicia el aprendizaje justo antes de enero.
+Tres en español y tres en inglés, grabadas aparte y no subtituladas. Cada quince días se apaga la peor.
+
+### Cómo se montan las campañas
+
+| Campaña          | Objetivo en Meta                       | Público                                                                     |
+|------------------|----------------------------------------|-----------------------------------------------------------------------------|
+| **PERFIL-ES**    | Tráfico, destino *perfil de Instagram* | 12 km de Guardamar, 22 a 60 años                                            |
+| **PERFIL-EN**    | Lo mismo                               | El mismo radio, dispositivos en inglés, 35 a 70 años                        |
+| **SIMILARES**    | Tráfico al perfil                      | Público similar a quien ya sigue la cuenta. Solo a partir de 300 seguidores |
+| **CUENTA ATRÁS** | Alcance, en enero                      | 10 km, todas las edades                                                     |
+| **GOOGLE**       | Búsqueda y Maps, en enero              | Quien busca dónde desayunar                                                 |
+
+No se usa el objetivo de **Reconocimiento**: optimiza para que te vean, no para que entren al perfil. Es exactamente el error que convierte esto en dinero tirado.
+
+### Reparto
+
+| Mes                | Inversión   | Condición                                           |
+|--------------------|-------------|-----------------------------------------------------|
+| Nov (lo que queda) | 150 €       | Solo cuando el perfil tenga sus nueve publicaciones |
+| Dic                | 700 €       | A partir del 15, con la categoría ya revelada       |
+| Ene                | 950 €       | Cuenta atrás, apertura y Google                     |
+| Feb                | 500 €       | Sostener el mes más flojo del año                   |
+| **Total**          | **2.300 €** |                                                     |
+
+### Los números que hay que vigilar
+
+| Qué miro                                   | Rango normal en un mercado local pequeño       |
+|--------------------------------------------|------------------------------------------------|
+| Coste por visita al perfil                 | 0,08 – 0,25 €                                  |
+| Porcentaje de visitas que acaban siguiendo | 15 – 30%, y depende del perfil, no del anuncio |
+| **Coste por seguidor**                     | **0,30 – 1,20 €**                              |
+| Seguidores locales el día de abrir         | 1.500 – 2.500                                  |
+
+**La regla de corte: si un seguidor pasa de 1,50 €, se cambia la creatividad, no el presupuesto.** Y si la tasa de seguimiento baja del 10%, el problema no es el anuncio: es el perfil, y hay que arreglarlo antes de seguir gastando.
+
+### El riesgo de comprar seguidores, dicho claro
+
+Un seguidor pagado vale menos que uno orgánico: interactúa menos. Y como Instagram reparte alcance según el porcentaje de gente que reacciona, **2.000 seguidores que no hacen nada hacen que las publicaciones lleguen a menos gente que con 800 implicados**. Por eso el radio se mantiene corto y local, y por eso el contenido tiene que ganarse la interacción. El número por el número es contraproducente.
+
+### Y los 100 € que resuelven la discusión del misterio
+
+La primera semana, en lugar de discutirlo: **dos anuncios idénticos salvo el texto**, uno que no dice qué es y otro que sí, 50 € cada uno, diez días. Se compara el coste por seguidor. Son 100 € para decidir dónde van los otros 2.200, y nadie tiene que convencer a nadie.
 
 ## Lo físico: la Navidad manda
 
