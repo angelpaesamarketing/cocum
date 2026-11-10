@@ -27,6 +27,22 @@ El build command va vacío a propósito: la imagen de Cloudflare no trae Pillow,
 lo que genera la tarjeta de compartir y los iconos. Por eso el sitio se commitea ya
 construido.
 
+### Versión para GoHighLevel
+
+`landing/ghl.html` — el mismo teaser empaquetado para pegar en un elemento
+*Custom Code* de GHL. Difiere del original en tres cosas:
+
+- Las imágenes y el audio se cargan desde `https://cocum.pages.dev/img/`, porque
+  GHL no tiene esos archivos. Se cambia la constante `BASE` si algún día se suben
+  a su biblioteca de medios.
+- Todo el CSS va encapsulado bajo `.cocum-teaser` y las capas son `absolute` en
+  vez de `fixed`, para no tocar el `<body>` de GHL ni romper su editor.
+- No toca `html` ni `body`: ocupa una pantalla (`100dvh`) y deja que el resto de
+  la página siga desplazándose.
+
+Es un port manual: si se cambia `landing/index.html`, hay que trasladar el cambio
+a mano.
+
 ### Los dos ficheros
 
 | | Para qué |

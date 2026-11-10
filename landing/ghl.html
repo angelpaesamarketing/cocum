@@ -1,0 +1,518 @@
+<!--
+  COCUM ORIGIN — bloque para pegar en GoHighLevel
+  ------------------------------------------------
+  Se pega entero en un elemento "Custom Code" / HTML de GHL.
+
+  Diferencias con landing/index.html, que es la versión para Cloudflare:
+   · Las imágenes y el audio se cargan desde https://cocum.pages.dev, porque
+     GHL no tiene esos archivos. Si algún día se suben a la biblioteca de
+     medios de GHL, solo hay que cambiar BASE, abajo en el script.
+   · Todo el CSS va encapsulado bajo .cocum-teaser y las capas son absolute en
+     vez de fixed, para no tocar el <body> de GHL ni romper el editor.
+   · No se tocan html ni body: el bloque ocupa una pantalla y ya está.
+-->
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap");
+
+.cocum-teaser {
+  --ink:     #0F120C;
+  --cream:   #EFE4D0;
+  --dim:     #B4AC98;
+  --gold:    #D9B36B;
+  --gold-hi: #F0D49A;
+  --sans:    "Jost", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 300;
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+.cocum-teaser *, .cocum-teaser *::before, .cocum-teaser *::after { box-sizing: border-box; }
+.cocum-teaser img { display: block; max-width: 100%; }
+.cocum-teaser p { margin: 0; }
+
+/* ── capas ── */
+.cocum-teaser .ct-layer { position: absolute; inset: 0; pointer-events: none; }
+
+.cocum-teaser .ct-fondo, .cocum-teaser .ct-hojas {
+  background-size: cover; background-position: center;
+  opacity: 0; transition: opacity 1.1s ease;
+}
+.cocum-teaser .ct-fondo.on, .cocum-teaser .ct-hojas.on { opacity: 1; }
+
+/* respaldo por si la imagen no carga */
+.cocum-teaser .ct-glow {
+  background:
+    radial-gradient(60% 50% at 50% 46%, rgba(217,179,107,.16) 0%, rgba(217,179,107,.05) 40%, transparent 72%),
+    radial-gradient(120% 90% at 22% 0%, rgba(240,212,154,.10) 0%, transparent 58%);
+  animation: ct-breathe 10s ease-in-out infinite;
+}
+.cocum-teaser .ct-scrim {
+  background:
+    radial-gradient(70% 58% at 50% 48%, rgba(10,14,8,.52) 0%, rgba(10,14,8,.28) 55%, transparent 85%),
+    linear-gradient(180deg, rgba(10,14,8,.30) 0%, transparent 28%, transparent 62%, rgba(8,11,6,.52) 100%);
+}
+.cocum-teaser .ct-vignette {
+  background: radial-gradient(135% 115% at 50% 46%, transparent 40%, rgba(6,9,4,.78) 100%);
+}
+.cocum-teaser .ct-motas { display: block; width: 100%; height: 100%; }
+
+@keyframes ct-breathe {
+  0%, 100% { opacity: .8; transform: scale(1); }
+  50%      { opacity: 1;  transform: scale(1.04); }
+}
+
+/* Cada paño de hojas es una copia opaca del mismo fondo, recortada con una
+   máscara sobre una esquina. Como tapa exactamente lo que hay debajo, se puede
+   mover sin que asome el fondo quieto. El giro es desde la esquina: la base no
+   se mueve y las puntas sí. La amplitud va en variables para poder subirla en
+   vertical y bajarla para quien pida menos movimiento. */
+@keyframes ct-vaiven {
+  0%, 100% { transform: rotate(calc(var(--giro) * -.22)) scale(1.003) translate3d(0, 0, 0); }
+  50%      { transform: rotate(var(--giro)) scale(var(--esc)) translate3d(var(--dx), var(--dy), 0); }
+}
+.cocum-teaser .ct-hojas-a,
+.cocum-teaser .ct-hojas-b,
+.cocum-teaser .ct-hojas-c { animation: ct-vaiven 9s ease-in-out infinite; }
+.cocum-teaser .ct-hojas-a {
+  -webkit-mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
+          mask-image: radial-gradient(62% 58% at 6% 2%, #000 0%, #000 40%, transparent 76%);
+  transform-origin: 0% 0%;
+  --giro: 2.4deg; --esc: 1.016; --dx: 6px; --dy: 3px;
+}
+.cocum-teaser .ct-hojas-b {
+  -webkit-mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
+          mask-image: radial-gradient(54% 62% at 96% 8%, #000 0%, #000 38%, transparent 74%);
+  transform-origin: 100% 0%;
+  animation-duration: 12.5s; animation-delay: -4s;
+  --giro: -2deg; --esc: 1.014; --dx: -6px; --dy: 5px;
+}
+.cocum-teaser .ct-hojas-c {
+  -webkit-mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
+          mask-image: radial-gradient(50% 46% at 92% 96%, #000 0%, #000 38%, transparent 74%);
+  transform-origin: 100% 100%;
+  animation-duration: 16s; animation-delay: -9s;
+  --giro: -1.4deg; --esc: 1.012; --dx: -4px; --dy: -5px;
+}
+
+/* ── contenido ── */
+.cocum-teaser .ct-stage {
+  position: relative; z-index: 2;
+  height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: clamp(16px, 3.2vh, 30px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: clamp(30px, 7vh, 60px);
+  text-align: center;
+}
+
+.cocum-teaser .ct-mark {
+  perspective: 900px;
+  width: clamp(96px, 18vmin, 158px);
+  flex: none;
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-select: none; user-select: none;
+  border-radius: 50%;
+}
+.cocum-teaser .ct-mark.arrastrando { cursor: grabbing; }
+.cocum-teaser .ct-mark img {
+  width: 100%; height: auto;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 0 24px rgba(217,179,107,.45)) drop-shadow(0 0 64px rgba(217,179,107,.2));
+  will-change: transform;
+}
+
+.cocum-teaser .ct-lockup { display: grid; gap: clamp(9px, 1.7vh, 16px); justify-items: center; }
+.cocum-teaser .ct-lockup img {
+  width: clamp(198px, 47vmin, 352px); height: auto;
+  filter: drop-shadow(0 0 30px rgba(10,14,8,.75)) drop-shadow(0 1px 2px rgba(0,0,0,.5));
+}
+.cocum-teaser .ct-origin { display: flex; align-items: center; gap: clamp(10px, 2.4vmin, 18px); }
+.cocum-teaser .ct-origin i { width: clamp(22px, 6vmin, 44px); height: 1px; background: rgba(217,179,107,.6); }
+.cocum-teaser .ct-origin span {
+  font-size: clamp(.58rem, 1.6vmin, .72rem);
+  letter-spacing: .5em; padding-left: .5em;
+  color: var(--gold); font-style: normal;
+}
+
+.cocum-teaser .ct-soon { display: grid; gap: clamp(9px, 1.7vh, 15px); justify-items: center; }
+.cocum-teaser .ct-rule {
+  width: clamp(110px, 24vmin, 176px); height: 1px; border: 0; margin: 0;
+  background: linear-gradient(90deg, transparent, rgba(217,179,107,.5), transparent);
+}
+.cocum-teaser .ct-soon strong {
+  font-weight: 400;
+  font-size: clamp(.72rem, 2vmin, .9rem);
+  letter-spacing: .42em; padding-left: .42em;
+  color: var(--gold-hi);
+  text-shadow: 0 0 22px rgba(10,14,8,.9);
+}
+.cocum-teaser .ct-where {
+  font-size: clamp(.54rem, 1.45vmin, .66rem);
+  letter-spacing: .28em; padding-left: .28em;
+  color: var(--dim);
+  text-shadow: 0 0 18px rgba(10,14,8,.9);
+}
+
+/* ── pie ── */
+.cocum-teaser .ct-ig {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: calc(clamp(14px, 3vh, 28px) + env(safe-area-inset-bottom, 0px));
+  z-index: 3;
+  font-size: .74rem; letter-spacing: .2em;
+  color: var(--dim); text-decoration: none;
+  padding: 9px 14px; border-radius: 999px;
+  text-shadow: 0 0 18px rgba(10,14,8,.9);
+  transition: color .2s ease, background .2s ease;
+}
+.cocum-teaser .ct-ig:hover,
+.cocum-teaser .ct-ig:focus-visible { color: var(--gold-hi); background: rgba(217,179,107,.1); }
+
+.cocum-teaser .ct-sonido {
+  position: absolute; z-index: 3;
+  left: calc(clamp(12px, 2.4vw, 26px) + env(safe-area-inset-left, 0px));
+  bottom: calc(clamp(12px, 3vh, 26px) + env(safe-area-inset-bottom, 0px));
+  width: 48px; height: 48px; padding: 0; margin: 0;
+  display: grid; place-items: center;
+  background: rgba(12,16,10,.62); border: 1px solid rgba(217,179,107,.5);
+  border-radius: 999px; cursor: pointer;
+  color: var(--gold);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.cocum-teaser .ct-sonido:hover,
+.cocum-teaser .ct-sonido:focus-visible { color: var(--gold-hi); border-color: rgba(217,179,107,.85); }
+.cocum-teaser .ct-sonido svg { width: 19px; height: 19px; }
+.cocum-teaser .ct-sonido .off { display: none; }
+.cocum-teaser .ct-sonido[aria-pressed="true"] { color: var(--gold-hi); }
+.cocum-teaser .ct-sonido[aria-pressed="true"] .on { display: none; }
+.cocum-teaser .ct-sonido[aria-pressed="true"] .off { display: block; }
+/* anillo que late hasta que alguien lo toca: si no, el botón pasa inadvertido */
+.cocum-teaser .ct-sonido.pista::after {
+  content: ""; position: absolute; inset: -5px;
+  border: 1px solid var(--gold); border-radius: 999px;
+  animation: ct-latido 2.6s ease-out infinite;
+}
+@keyframes ct-latido {
+  0%   { opacity: .75; transform: scale(1); }
+  70%  { opacity: 0;   transform: scale(1.45); }
+  100% { opacity: 0;   transform: scale(1.45); }
+}
+.cocum-teaser .ct-etiqueta {
+  position: absolute; z-index: 3;
+  left: calc(clamp(12px, 2.4vw, 26px) + 60px + env(safe-area-inset-left, 0px));
+  bottom: calc(clamp(12px, 3vh, 26px) + 15px + env(safe-area-inset-bottom, 0px));
+  font-size: .62rem; letter-spacing: .26em; padding-left: .26em;
+  color: var(--gold); pointer-events: none;
+  text-shadow: 0 0 16px rgba(10,14,8,.95);
+  transition: opacity .6s ease;
+}
+.cocum-teaser .ct-etiqueta.fuera { opacity: 0; }
+
+.cocum-teaser :focus-visible { outline: 1px solid var(--gold); outline-offset: 2px; }
+
+/* en vertical el recorte es estrecho y el pivote queda cerca: hace falta más
+   giro para que se note lo mismo que en una pantalla ancha.
+   VA DESPUÉS de las reglas base: misma especificidad, gana la última. */
+@media (orientation: portrait) {
+  .cocum-teaser .ct-fondo, .cocum-teaser .ct-hojas { background-position: 30% center; }
+  .cocum-teaser .ct-hojas-a,
+  .cocum-teaser .ct-hojas-b,
+  .cocum-teaser .ct-hojas-c { animation-duration: 7.5s; }
+  /* ojo con el signo: girando desde la esquina superior izquierda la hoja se
+     va hacia la izquierda y abajo; si el desplazamiento va al revés, lo anula */
+  .cocum-teaser .ct-hojas-a {
+    -webkit-mask-image: radial-gradient(66% 62% at 6% 2%, #000 0%, #000 30%, transparent 84%);
+            mask-image: radial-gradient(66% 62% at 6% 2%, #000 0%, #000 30%, transparent 84%);
+    --giro: 6.2deg; --esc: 1.018; --dx: -12px; --dy: 10px;
+  }
+  .cocum-teaser .ct-hojas-b {
+    -webkit-mask-image: radial-gradient(58% 66% at 96% 8%, #000 0%, #000 28%, transparent 82%);
+            mask-image: radial-gradient(58% 66% at 96% 8%, #000 0%, #000 28%, transparent 82%);
+    animation-duration: 10.5s;
+    --giro: -5.2deg; --esc: 1.016; --dx: 11px; --dy: 10px;
+  }
+  .cocum-teaser .ct-hojas-c {
+    -webkit-mask-image: radial-gradient(82% 44% at 40% 103%, #000 0%, #000 34%, transparent 86%);
+            mask-image: radial-gradient(82% 44% at 40% 103%, #000 0%, #000 34%, transparent 86%);
+    transform-origin: 40% 114%;
+    animation-duration: 13s;
+    --giro: -4.2deg; --esc: 1.022; --dx: -11px; --dy: -4px;
+  }
+}
+
+/* en pantalla estrecha el rótulo chocaba con el usuario de Instagram */
+@media (max-width: 560px) {
+  .cocum-teaser .ct-etiqueta {
+    left: calc(clamp(12px, 2.4vw, 26px) + env(safe-area-inset-left, 0px));
+    bottom: calc(clamp(12px, 3vh, 26px) + 58px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* quien pide menos movimiento recibe menos, no cero: con todo parado la
+   página parece rota. Va al final para ganar a lo anterior. */
+@media (prefers-reduced-motion: reduce) {
+  .cocum-teaser .ct-glow { animation: none; }
+  .cocum-teaser .ct-sonido.pista::after { animation: none; }
+  .cocum-teaser .ct-hojas-a,
+  .cocum-teaser .ct-hojas-b,
+  .cocum-teaser .ct-hojas-c { animation-duration: 32s; --esc: 1.004; }
+  .cocum-teaser .ct-hojas-a { --giro: .7deg;  --dx: 2px;  --dy: 1px; }
+  .cocum-teaser .ct-hojas-b { --giro: -.6deg; --dx: -2px; --dy: 1px; }
+  .cocum-teaser .ct-hojas-c { --giro: -.45deg; --dx: -1px; --dy: -1px; }
+}
+</style>
+
+<div class="cocum-teaser" id="cocumTeaser">
+  <div class="ct-layer ct-glow"></div>
+  <div class="ct-layer ct-fondo" data-fondo></div>
+  <div class="ct-layer ct-hojas ct-hojas-a" data-fondo></div>
+  <div class="ct-layer ct-hojas ct-hojas-b" data-fondo></div>
+  <div class="ct-layer ct-hojas ct-hojas-c" data-fondo></div>
+  <div class="ct-layer ct-scrim"></div>
+  <canvas class="ct-layer ct-motas" aria-hidden="true"></canvas>
+  <div class="ct-layer ct-vignette"></div>
+
+  <div class="ct-stage">
+    <div class="ct-mark" role="img" aria-label="Símbolo de Cocum Origin. Arrástralo para girarlo.">
+      <img alt="" draggable="false" width="512" height="512">
+    </div>
+
+    <div class="ct-lockup">
+      <img class="ct-logotipo" alt="Cocum" width="1200" height="400">
+      <div class="ct-origin"><i></i><span>ORIGIN</span><i></i></div>
+    </div>
+
+    <div class="ct-soon">
+      <hr class="ct-rule">
+      <strong>PRÓXIMAMENTE</strong>
+      <p class="ct-where">GUARDAMAR DEL SEGURA · ENERO</p>
+    </div>
+  </div>
+
+  <p class="ct-etiqueta">ACTIVA EL SONIDO</p>
+
+  <button class="ct-sonido pista" type="button" aria-pressed="false" aria-label="Activar sonido ambiente">
+    <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4z"></path><path d="M16 9a4 4 0 0 1 0 6"></path>
+    </svg>
+    <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4z"></path><path d="M15.5 9a4 4 0 0 1 0 6"></path><path d="M18.5 6.5a8 8 0 0 1 0 11"></path>
+    </svg>
+  </button>
+
+  <a class="ct-ig" href="#" target="_blank" rel="noopener">@cocumorigin</a>
+</div>
+
+<script>
+(function () {
+  // ───────────────────────────────────────────────────────────
+  // 1. De dónde salen las imágenes y el audio. Si algún día se suben a la
+  //    biblioteca de medios de GHL, se cambia esta línea por su carpeta.
+  var BASE = "https://cocum.pages.dev/img/";
+  // 2. El usuario real de Instagram: es el único enlace de la página.
+  var INSTAGRAM = "https://www.instagram.com/cocumorigin/";
+  // 3. Volumen del ambiente, de 0 a 1.
+  var VOLUMEN = 0.3;
+  // ───────────────────────────────────────────────────────────
+
+  var raiz = document.getElementById("cocumTeaser");
+  if (!raiz || raiz.dataset.listo) return;
+  raiz.dataset.listo = "1";
+
+  var $ = function (sel) { return raiz.querySelector(sel); };
+  var quieto = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  $(".ct-mark img").src = BASE + "marca-alpha.png";
+  $(".ct-logotipo").src = BASE + "cocum-wordmark.png";
+  $(".ct-ig").href = INSTAGRAM;
+
+  /* ── fondo y hojas ── */
+  var capas = raiz.querySelectorAll("[data-fondo]");
+  var sonda = new Image();
+  sonda.onload = function () {
+    for (var i = 0; i < capas.length; i++) {
+      capas[i].style.backgroundImage = 'url("' + BASE + 'fondo.webp")';
+      capas[i].classList.add("on");
+    }
+  };
+  sonda.src = BASE + "fondo.webp";
+
+  /* ── el símbolo: gira solo, y se puede arrastrar ── */
+  var mark = $(".ct-mark"), marcaImg = $(".ct-mark img");
+  var giro = -27, inclina = 5, velocidad = 0;
+  var arrastrando = false, tocado = false, ultimoX = 0, ultimoY = 0, t = 0;
+
+  mark.addEventListener("pointerdown", function (ev) {
+    arrastrando = true; tocado = true; velocidad = 0;
+    ultimoX = ev.clientX; ultimoY = ev.clientY;
+    mark.setPointerCapture(ev.pointerId);
+    mark.classList.add("arrastrando");
+    primerGesto();
+  });
+  mark.addEventListener("pointermove", function (ev) {
+    if (!arrastrando) return;
+    var dx = ev.clientX - ultimoX, dy = ev.clientY - ultimoY;
+    ultimoX = ev.clientX; ultimoY = ev.clientY;
+    giro += dx * 0.55;
+    inclina = Math.max(-32, Math.min(32, inclina - dy * 0.3));
+    velocidad = dx * 0.55;
+  });
+  function soltar(ev) {
+    if (!arrastrando) return;
+    arrastrando = false;
+    mark.classList.remove("arrastrando");
+    if (ev && ev.pointerId !== undefined && mark.hasPointerCapture(ev.pointerId)) {
+      mark.releasePointerCapture(ev.pointerId);
+    }
+  }
+  mark.addEventListener("pointerup", soltar);
+  mark.addEventListener("pointercancel", soltar);
+
+  /* ── partículas ── */
+  var cv = $(".ct-motas"), ctx = cv.getContext("2d");
+  var motas = [], w = 0, h = 0, dpr = 1;
+
+  function nuevaMota(inicial) {
+    return {
+      x: Math.random() * w,
+      y: inicial ? Math.random() * h : h + 12,
+      r: 0.5 + Math.random() * 2.1,
+      v: 0.10 + Math.random() * 0.34,
+      deriva: (Math.random() - 0.5) * 0.17,
+      a: 0.12 + Math.random() * 0.48,
+      f: Math.random() * Math.PI * 2
+    };
+  }
+  function medir() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = cv.clientWidth; h = cv.clientHeight;
+    if (!w || !h) return;
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var n = Math.round(Math.min(70, Math.max(26, w * h / 26000)));
+    motas = [];
+    for (var i = 0; i < n; i++) motas.push(nuevaMota(true));
+  }
+  function pintarMotas() {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < motas.length; i++) {
+      var m = motas[i], parpadeo = 0.72 + 0.28 * Math.sin(m.f);
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(236, 206, 146, " + (m.a * parpadeo).toFixed(3) + ")";
+      ctx.fill();
+    }
+  }
+
+  function fotograma() {
+    t += 1;
+    if (!arrastrando) {
+      if (tocado) {
+        giro += velocidad;
+        velocidad *= 0.955;
+        if (Math.abs(velocidad) < 0.02) velocidad = 0;
+        inclina += (0 - inclina) * 0.02;
+      } else if (!quieto) {
+        giro = -27 * Math.cos(t * 2 * Math.PI / 660);
+        inclina = 4.5 * Math.cos(t * 2 * Math.PI / 660);
+      }
+    }
+    var flote = quieto ? 0 : 5 * Math.sin(t * 2 * Math.PI / 390);
+    marcaImg.style.transform =
+      "translate3d(0, " + flote.toFixed(2) + "px, 0) rotateY(" + giro.toFixed(2) + "deg) rotateX(" + inclina.toFixed(2) + "deg)";
+
+    var paso = quieto ? 0.35 : 1;
+    for (var i = 0; i < motas.length; i++) {
+      var m = motas[i];
+      m.y -= m.v * paso; m.x += m.deriva * paso; m.f += 0.012 * paso;
+      if (m.y < -12 || m.x < -12 || m.x > w + 12) motas[i] = nuevaMota(false);
+    }
+    pintarMotas();
+    requestAnimationFrame(fotograma);
+  }
+
+  medir();
+  window.addEventListener("resize", medir);
+  // el editor de GHL cambia el tamaño del bloque al entrar y salir de vista
+  if (window.ResizeObserver) new ResizeObserver(medir).observe(raiz);
+  requestAnimationFrame(fotograma);
+
+  /* ── ambiente ──
+     Ningún navegador deja sonar nada hasta que la persona toca la página, así
+     que arranca apagado y se enciende con el botón o al girar el símbolo. */
+  var btn = $(".ct-sonido"), etiqueta = $(".ct-etiqueta");
+  var sonando = false, audioEl = null, fundido = null;
+
+  function subir() {
+    if (!audioEl) {
+      audioEl = new Audio(BASE + "ambiente.mp3");
+      audioEl.loop = true; audioEl.preload = "auto"; audioEl.volume = 0;
+    }
+    var arrancar = function () {
+      clearInterval(fundido);
+      var v = audioEl.volume;
+      fundido = setInterval(function () {
+        v = Math.min(VOLUMEN, v + 0.02);
+        audioEl.volume = v;
+        if (v >= VOLUMEN) clearInterval(fundido);
+      }, 60);
+    };
+    var p = audioEl.play();
+    if (p && p.then) p.then(arrancar)["catch"](function () {}); else arrancar();
+  }
+  function bajar() {
+    if (!audioEl) return;
+    clearInterval(fundido);
+    var v = audioEl.volume;
+    fundido = setInterval(function () {
+      v = Math.max(0, v - 0.04);
+      audioEl.volume = v;
+      if (v <= 0) { clearInterval(fundido); audioEl.pause(); }
+    }, 50);
+  }
+  function alternar(encender) {
+    sonando = encender;
+    btn.setAttribute("aria-pressed", String(sonando));
+    btn.setAttribute("aria-label", sonando ? "Silenciar sonido ambiente" : "Activar sonido ambiente");
+    if (sonando) subir(); else bajar();
+    try { localStorage.setItem("cocum-sonido", sonando ? "1" : "0"); } catch (e) {}
+  }
+
+  function quitarPista() {
+    btn.classList.remove("pista");
+    etiqueta.classList.add("fuera");
+    try { localStorage.setItem("cocum-pista", "1"); } catch (e) {}
+  }
+  var pistaVista = false;
+  try { pistaVista = localStorage.getItem("cocum-pista") === "1"; } catch (e) {}
+  if (pistaVista) quitarPista(); else setTimeout(quitarPista, 9000);
+
+  btn.addEventListener("click", function () { quitarPista(); alternar(!sonando); });
+
+  var querido = false;
+  try { querido = localStorage.getItem("cocum-sonido") === "1"; } catch (e) {}
+  function primerGesto() {
+    if (querido && !sonando) alternar(true);
+    querido = false;
+  }
+  raiz.addEventListener("pointerdown", primerGesto, { once: true });
+
+  document.addEventListener("visibilitychange", function () {
+    if (!sonando) return;
+    if (document.hidden) bajar(); else subir();
+  });
+})();
+</script>
